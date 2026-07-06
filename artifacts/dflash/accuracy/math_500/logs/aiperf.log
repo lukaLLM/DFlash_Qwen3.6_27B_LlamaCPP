@@ -703,3 +703,1328 @@ aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashb
 2026-07-05 19:03:10.250 - ExporterManager - INFO - Exporting all records
 2026-07-05 19:03:10.257 - AccuracyDataExporter - INFO - Accuracy results exported to /home/luke/Documents/Code/DFlash/artifacts/dflash/accuracy/math_500/accuracy_results.csv
 2026-07-05 19:03:10.258 - ExporterManager - INFO - Exporting console data
+2026-07-06 19:10:19.831 - GPUTelemetryJSONLWriter_f3b745fb - INFO - GPU telemetry export enabled: /home/luke/Documents/Code/DFlash/artifacts/dflash/accuracy/math_500/gpu_telemetry_export.jsonl
+2026-07-06 19:10:19.838 - OTelMetricsResultsProcessor_ce75ae1c - INFO - Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-07-06 19:10:19.838 - records_manager - INFO - OTel metrics streamer is disabled and will not be used: Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-07-06 19:10:19.839 - RecordExportResultsProcessor_668010f9 - INFO - Record metrics export enabled: /home/luke/Documents/Code/DFlash/artifacts/dflash/accuracy/math_500/profile_export.jsonl
+2026-07-06 19:10:19.858 - server_metrics_manager - INFO - Server Metrics: Discovered 1 endpoints: ['http://localhost:8001/metrics']
+2026-07-06 19:10:19.863 - system_controller - INFO - Registered Server Metrics Manager (id: 'server_metrics_manager')
+2026-07-06 19:10:19.917 - system_controller - INFO - Registered Dataset Manager (id: 'dataset_manager')
+2026-07-06 19:10:19.924 - system_controller - INFO - Registered Worker Manager (id: 'worker_manager')
+2026-07-06 19:10:19.950 - system_controller - INFO - Registered Records Manager (id: 'records_manager')
+2026-07-06 19:10:19.950 - system_controller - INFO - Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager')
+2026-07-06 19:10:19.958 - system_controller - INFO - Registered Record Processor (id: 'record_processor_14bbc201')
+2026-07-06 19:10:20.443 - system_controller - INFO - Registered Timing Manager (id: 'timing_manager')
+2026-07-06 19:10:20.560 - system_controller - INFO - Registered Worker (id: 'worker_023cb9b1')
+2026-07-06 19:10:20.849 - system_controller - INFO - AIPerf System is CONFIGURING
+2026-07-06 19:10:20.849 - system_controller - INFO - Configuring all services to start profiling
+2026-07-06 19:10:20.850 - InferenceResultParser_0c7594c7 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-07-06 19:10:20.850 - timing_manager - INFO - Waiting for dataset to be configured before configuring timing
+2026-07-06 19:10:20.850 - dataset_manager - INFO - Configuring tokenizer(s) for dataset manager
+2026-07-06 19:10:20.853 - server_metrics_manager - INFO - Server Metrics: Capturing baseline metrics...
+2026-07-06 19:10:20.855 - system_controller - INFO - Server metrics enabled - 1/1 endpoint(s) reachable.
+2026-07-06 19:10:20.859 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9400/metrics is not reachable
+2026-07-06 19:10:20.860 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9401/metrics is not reachable
+2026-07-06 19:10:20.861 - system_controller - INFO - DCGM telemetry skipped: no DCGM endpoints reachable
+2026-07-06 19:10:21.234 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-06 19:10:21.430 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-06 19:10:22.537 - InferenceResultParser_0c7594c7 - INFO - Initialized tokenizers: {'qwen36-dflash10': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3.6-27B'}} in 1.69 seconds
+2026-07-06 19:10:22.735 - dataset_manager - INFO - Tokenizer(s) configured in 1.89 seconds
+2026-07-06 19:10:22.735 - dataset_manager - INFO - Configuring dataset for dataset_manager
+2026-07-06 19:10:24.651 - MemoryMapDatasetBackingStore_724527e0 - INFO - Memory-mapped backing store initialized (streaming to /tmp/aiperf_mmap_8a0d9244ba18/dataset.dat)
+2026-07-06 19:10:24.660 - MemoryMapDatasetBackingStore_724527e0 - INFO - Data file finalized: 500 conversations, 0.74 MB
+2026-07-06 19:10:24.661 - MemoryMapDatasetBackingStore_724527e0 - INFO - Index file created: /tmp/aiperf_mmap_8a0d9244ba18/index.dat
+2026-07-06 19:10:24.661 - dataset_manager - INFO - Backing store finalized: client_type=DatasetClientStoreType.MEMORY_MAP data_file_path=PosixPath('/tmp/aiperf_mmap_8a0d9244ba18/dataset.dat') index_file_path=PosixPath('/tmp/aiperf_mmap_8a0d9244ba18/index.dat') conversation_count=500 total_size_bytes=770789 compressed_data_file_path=None compressed_index_file_path=None compressed_size_bytes=0
+2026-07-06 19:10:24.662 - dataset_manager - INFO - sampling strategy: sequential, unique conversations: 500, unique turn count: 500
+2026-07-06 19:10:24.665 - dataset_manager - INFO - Generating inputs.json file at /home/luke/Documents/Code/DFlash/artifacts/dflash/accuracy/math_500/inputs.json
+2026-07-06 19:10:24.668 - PhaseOrchestrator_188d611b - INFO - Initialized 1 phase(s): ['Profiling']
+2026-07-06 19:10:24.670 - dataset_manager - INFO - inputs.json file generated in 0.01 seconds
+2026-07-06 19:10:25.079 - dataset_manager - INFO - Dataset client initialized and freed 500 conversations from memory
+2026-07-06 19:10:25.079 - dataset_manager - INFO - Dataset configured in 2.34 seconds
+2026-07-06 19:10:25.089 - system_controller - INFO - All services configured in 4.24 seconds
+2026-07-06 19:10:25.089 - system_controller - INFO - AIPerf System is CONFIGURED
+2026-07-06 19:10:25.090 - server_metrics_manager - INFO - Server Metrics: Started 1 collector(s) successfully
+2026-07-06 19:10:25.090 - system_controller - INFO - All services started profiling successfully
+2026-07-06 19:10:25.090 - system_controller - INFO - AIPerf System is PROFILING
+2026-07-06 19:10:25.091 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-07-06 19:10:25.091 - PhaseRunner - NOTICE - Phase profiling started | target: 100 requests
+2026-07-06 19:10:25.092 - records_manager - INFO - Credit phase start: profiling
+2026-07-06 19:10:26.797 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 353 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:10:29.850 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:29.850 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:29.851 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:30.782 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 986 tokens (requested 32768, diff -97.0%)
+2026-07-06 19:10:32.621 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 542 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:10:34.851 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:34.851 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:34.852 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:35.217 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 758 tokens (requested 32768, diff -97.7%)
+2026-07-06 19:10:38.367 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 681 tokens (requested 32768, diff -97.9%)
+2026-07-06 19:10:39.854 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:39.854 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:39.854 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:39.946 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 346 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:10:42.497 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 609 tokens (requested 32768, diff -98.1%)
+2026-07-06 19:10:44.856 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:44.856 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:44.856 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:45.948 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1012 tokens (requested 32768, diff -96.9%)
+2026-07-06 19:10:47.622 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 465 tokens (requested 32768, diff -98.6%)
+2026-07-06 19:10:49.857 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'dark', 'focus'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:49.858 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:10:49.858 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:10.914 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 4943 tokens (requested 32768, diff -84.9%)
+2026-07-06 19:11:14.860 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:14.860 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:14.860 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:18.199 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1343 tokens (requested 32768, diff -95.9%)
+2026-07-06 19:11:19.861 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:19.862 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:19.862 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:26.235 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2356 tokens (requested 32768, diff -92.8%)
+2026-07-06 19:11:29.864 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:29.864 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:29.864 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:30.809 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1414 tokens (requested 32768, diff -95.7%)
+2026-07-06 19:11:32.253 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 325 tokens (requested 32768, diff -99.0%)
+2026-07-06 19:11:34.865 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:34.866 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:34.866 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:35.549 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 835 tokens (requested 32768, diff -97.5%)
+2026-07-06 19:11:38.822 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 924 tokens (requested 32768, diff -97.2%)
+2026-07-06 19:11:39.868 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:39.868 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:39.868 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:40.665 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 429 tokens (requested 32768, diff -98.7%)
+2026-07-06 19:11:44.869 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:44.869 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:44.869 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:47.434 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1458 tokens (requested 32768, diff -95.6%)
+2026-07-06 19:11:49.871 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:49.871 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:11:49.871 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:39.608 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 9748 tokens (requested 32768, diff -70.3%)
+2026-07-06 19:12:39.873 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:39.874 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:39.874 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:44.073 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1079 tokens (requested 32768, diff -96.7%)
+2026-07-06 19:12:44.876 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:44.876 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:44.877 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:45.266 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 247 tokens (requested 32768, diff -99.2%)
+2026-07-06 19:12:49.879 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:49.879 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:49.879 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:51.936 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1713 tokens (requested 32768, diff -94.8%)
+2026-07-06 19:12:54.881 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:54.881 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:54.891 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:55.751 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1033 tokens (requested 32768, diff -96.8%)
+2026-07-06 19:12:58.765 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 823 tokens (requested 32768, diff -97.5%)
+2026-07-06 19:12:59.883 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:59.884 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:12:59.893 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:03.600 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1231 tokens (requested 32768, diff -96.2%)
+2026-07-06 19:13:04.886 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:04.886 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:04.896 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:08.464 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1466 tokens (requested 32768, diff -95.5%)
+2026-07-06 19:13:09.890 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:09.890 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:09.891 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:19.803 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2433 tokens (requested 32768, diff -92.6%)
+2026-07-06 19:13:19.906 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:19.907 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:19.907 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:21.541 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 391 tokens (requested 32768, diff -98.8%)
+2026-07-06 19:13:23.209 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 358 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:13:24.892 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:24.892 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:24.893 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:25.487 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 583 tokens (requested 32768, diff -98.2%)
+2026-07-06 19:13:27.448 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 433 tokens (requested 32768, diff -98.7%)
+2026-07-06 19:13:28.813 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 312 tokens (requested 32768, diff -99.0%)
+2026-07-06 19:13:29.893 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:29.893 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:29.893 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:32.203 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 685 tokens (requested 32768, diff -97.9%)
+2026-07-06 19:13:34.896 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:34.896 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:34.896 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:35.324 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 847 tokens (requested 32768, diff -97.4%)
+2026-07-06 19:13:38.267 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 961 tokens (requested 32768, diff -97.1%)
+2026-07-06 19:13:39.898 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:39.898 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:39.898 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:40.675 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 609 tokens (requested 32768, diff -98.1%)
+2026-07-06 19:13:44.013 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 914 tokens (requested 32768, diff -97.2%)
+2026-07-06 19:13:44.900 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:44.900 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:44.900 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:45.938 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 372 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:13:47.524 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 374 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:13:49.902 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:49.902 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:49.902 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:50.599 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 915 tokens (requested 32768, diff -97.2%)
+2026-07-06 19:13:52.079 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 375 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:13:54.903 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:54.903 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:54.904 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:55.439 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1064 tokens (requested 32768, diff -96.8%)
+2026-07-06 19:13:56.634 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 309 tokens (requested 32768, diff -99.1%)
+2026-07-06 19:13:59.906 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:59.906 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:13:59.906 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:36.259 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 8699 tokens (requested 32768, diff -73.5%)
+2026-07-06 19:14:38.553 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 506 tokens (requested 32768, diff -98.5%)
+2026-07-06 19:14:39.909 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:39.909 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:39.909 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:40.034 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 282 tokens (requested 32768, diff -99.1%)
+2026-07-06 19:14:44.911 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:44.911 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:44.911 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:47.638 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2095 tokens (requested 32768, diff -93.6%)
+2026-07-06 19:14:49.913 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:49.913 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:49.913 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:50.119 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 564 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:14:51.433 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 302 tokens (requested 32768, diff -99.1%)
+2026-07-06 19:14:53.207 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 489 tokens (requested 32768, diff -98.5%)
+2026-07-06 19:14:54.915 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:54.915 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:54.915 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:57.575 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1076 tokens (requested 32768, diff -96.7%)
+2026-07-06 19:14:59.917 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:59.918 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:14:59.918 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:01.065 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 833 tokens (requested 32768, diff -97.5%)
+2026-07-06 19:15:03.295 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 595 tokens (requested 32768, diff -98.2%)
+2026-07-06 19:15:04.837 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 366 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:15:04.920 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:04.920 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:04.920 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:06.567 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 392 tokens (requested 32768, diff -98.8%)
+2026-07-06 19:15:09.722 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 854 tokens (requested 32768, diff -97.4%)
+2026-07-06 19:15:09.922 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:09.922 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:09.922 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:11.805 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 557 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:15:14.319 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 601 tokens (requested 32768, diff -98.2%)
+2026-07-06 19:15:14.925 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:14.925 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:14.925 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:15.985 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 378 tokens (requested 32768, diff -98.8%)
+2026-07-06 19:15:18.152 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 556 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:15:19.927 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:19.927 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:19.928 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:27.045 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2666 tokens (requested 32768, diff -91.9%)
+2026-07-06 19:15:29.929 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:29.929 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:29.929 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:32.889 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1457 tokens (requested 32768, diff -95.6%)
+2026-07-06 19:15:34.931 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:34.931 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:34.931 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:37.867 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1399 tokens (requested 32768, diff -95.7%)
+2026-07-06 19:15:39.932 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:39.933 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:39.933 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:41.999 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1243 tokens (requested 32768, diff -96.2%)
+2026-07-06 19:15:44.934 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:44.935 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:44.935 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:49.805 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2165 tokens (requested 32768, diff -93.4%)
+2026-07-06 19:15:49.937 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:49.937 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:49.937 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:51.297 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 258 tokens (requested 32768, diff -99.2%)
+2026-07-06 19:15:53.269 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 523 tokens (requested 32768, diff -98.4%)
+2026-07-06 19:15:54.939 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:54.939 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:54.939 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:55.526 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 633 tokens (requested 32768, diff -98.1%)
+2026-07-06 19:15:59.941 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:59.941 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:15:59.942 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:00.127 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1182 tokens (requested 32768, diff -96.4%)
+2026-07-06 19:16:03.583 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 958 tokens (requested 32768, diff -97.1%)
+2026-07-06 19:16:04.944 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:04.944 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:04.944 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:05.973 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 538 tokens (requested 32768, diff -98.4%)
+2026-07-06 19:16:08.542 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 571 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:16:09.945 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:09.945 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:09.945 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:10.335 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 440 tokens (requested 32768, diff -98.7%)
+2026-07-06 19:16:12.071 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 467 tokens (requested 32768, diff -98.6%)
+2026-07-06 19:16:14.269 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 564 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:16:14.949 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:14.949 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:14.950 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:17.372 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 804 tokens (requested 32768, diff -97.5%)
+2026-07-06 19:16:19.507 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 483 tokens (requested 32768, diff -98.5%)
+2026-07-06 19:16:19.951 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:19.951 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:19.952 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:21.020 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 363 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:16:24.877 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1074 tokens (requested 32768, diff -96.7%)
+2026-07-06 19:16:24.984 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:24.984 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:24.985 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:26.008 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 280 tokens (requested 32768, diff -99.1%)
+2026-07-06 19:16:29.955 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:29.956 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:29.956 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:40.227 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 3325 tokens (requested 32768, diff -89.9%)
+2026-07-06 19:16:41.886 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 400 tokens (requested 32768, diff -98.8%)
+2026-07-06 19:16:44.958 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:44.958 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:44.959 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:45.818 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 976 tokens (requested 32768, diff -97.0%)
+2026-07-06 19:16:49.505 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 916 tokens (requested 32768, diff -97.2%)
+2026-07-06 19:16:49.960 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:49.960 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:49.960 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:52.936 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1005 tokens (requested 32768, diff -96.9%)
+2026-07-06 19:16:54.871 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 462 tokens (requested 32768, diff -98.6%)
+2026-07-06 19:16:54.966 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:54.967 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:54.967 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:55.823 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 244 tokens (requested 32768, diff -99.3%)
+2026-07-06 19:16:58.042 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 608 tokens (requested 32768, diff -98.1%)
+2026-07-06 19:16:59.964 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:59.964 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:16:59.964 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:06.877 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2320 tokens (requested 32768, diff -92.9%)
+2026-07-06 19:17:09.966 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:09.966 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:09.966 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:10.161 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 941 tokens (requested 32768, diff -97.1%)
+2026-07-06 19:17:12.036 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 432 tokens (requested 32768, diff -98.7%)
+2026-07-06 19:17:14.393 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 548 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:17:14.969 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:14.969 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:14.969 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:18.011 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 916 tokens (requested 32768, diff -97.2%)
+2026-07-06 19:17:19.970 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:19.971 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:19.971 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:20.024 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 555 tokens (requested 32768, diff -98.3%)
+2026-07-06 19:17:24.973 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:24.973 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:24.973 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:40.833 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 4088 tokens (requested 32768, diff -87.5%)
+2026-07-06 19:17:43.153 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 636 tokens (requested 32768, diff -98.1%)
+2026-07-06 19:17:44.975 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:44.975 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:44.975 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:51.054 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2562 tokens (requested 32768, diff -92.2%)
+2026-07-06 19:17:53.183 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 367 tokens (requested 32768, diff -98.9%)
+2026-07-06 19:17:54.064 - PhaseRunner - NOTICE - Phase profiling sending complete | sent=100, completed=99, in_flight=1 | sessions: sent=100, completed=99
+2026-07-06 19:17:54.064 - records_manager - INFO - Sent 100 requests. Waiting for all to complete...
+2026-07-06 19:17:54.066 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 193 tokens (requested 32768, diff -99.4%)
+2026-07-06 19:17:54.978 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:54.978 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:54.979 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:59.262 - PhaseRunner - NOTICE - Phase profiling complete | completed=100, cancelled=0, errors=0 | sessions: completed=100, cancelled=0 | elapsed=454.17s
+2026-07-06 19:17:59.262 - PhaseOrchestrator_188d611b - NOTICE - All credits completed
+2026-07-06 19:17:59.262 - records_manager - INFO - Received CREDIT_PHASE_COMPLETE message, Phase complete: PhaseRecordsStats(phase=CreditPhase.PROFILING, start_ns=1783357825091681953, sent_end_ns=1783358274064168605, requests_end_ns=1783358279261966922, total_expected_requests=100, expected_duration_sec=None, expected_num_sessions=None, expected_grace_period_sec=None, final_requests_sent=None, final_requests_completed=100, final_requests_cancelled=0, final_request_errors=0, final_sent_sessions=None, final_completed_sessions=None, final_cancelled_sessions=None, timeout_triggered=False, grace_period_timeout_triggered=False, was_cancelled=False, records_end_ns=None, success_records=99, error_records=0)
+2026-07-06 19:17:59.262 - records_manager - NOTICE - All requests have completed, please wait for the results to be processed (currently 99 of 100 records processed)...
+2026-07-06 19:17:59.262 - records_manager - INFO - All credits complete, please wait for the results to be processed...
+2026-07-06 19:17:59.264 - system_controller - INFO - Received credits complete from 'timing_manager'
+2026-07-06 19:17:59.270 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1714 tokens (requested 32768, diff -94.8%)
+2026-07-06 19:17:59.300 - records_manager - INFO - Processed 100 valid requests and 0 errors (100 total).
+2026-07-06 19:17:59.300 - records_manager - INFO - Received all records, processing now...
+2026-07-06 19:17:59.301 - server_metrics_manager - INFO - Server Metrics: Profiling complete, capturing final metrics...
+2026-07-06 19:17:59.301 - records_manager - INFO - Waiting 2.0s for server metrics flush period...
+2026-07-06 19:17:59.980 - AIPerfDashboardUI_3227c160 - ERROR - Error running Hook(func=<bound method AIPerfTextualApp.on_realtime_metrics of AIPerfTextualApp(title='NVIDIA AIPerf', classes={'-dark-mode'}, pseudo_classes={'blur', 'dark'})>, params=None) hook for AIPerfDashboardUI: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:59.980 - aiperf.common.utils - ERROR - Error calling function _on_realtime_metrics: AIPerfMultiError("AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found")
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 76, in call_all_functions
+    await func(*args, **kwargs)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/realtime_metrics_mixin.py", line 27, in _on_realtime_metrics
+    await self.run_hooks(
+    ...<2 lines>...
+    )
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/mixins/hooks_mixin.py", line 190, in run_hooks
+    raise AIPerfMultiError(None, exceptions)
+aiperf.common.exceptions.AIPerfMultiError: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:17:59.981 - sub_client_78ba707b - ERROR - Error in subscription handler for topic realtime_metrics
+Traceback (most recent call last):
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/zmq/sub_client.py", line 191, in _handle_message
+    await call_all_functions(self._subscribers[topic], message)
+  File "/home/luke/.local/share/uv/tools/aiperf/lib/python3.13/site-packages/aiperf/common/utils.py", line 84, in call_all_functions
+    raise AIPerfMultiError("Errors calling functions", exceptions)
+aiperf.common.exceptions.AIPerfMultiError: Errors calling functions: AIPerfDashboardUI.on_realtime_metrics: Metric class with tag 'accuracy.overall' not found
+2026-07-06 19:18:01.262 - records_manager - INFO - Processing records results...
+2026-07-06 19:18:01.266 - system_controller - INFO - Waiting for server metrics results...
+2026-07-06 19:18:01.267 - records_manager - INFO - _finalize_and_process_results completed
+2026-07-06 19:18:01.272 - system_controller - INFO - Waiting for server metrics results...
+2026-07-06 19:18:01.272 - system_controller - INFO - All results received, initiating shutdown
+2026-07-06 19:18:02.043 - ExporterManager - INFO - Exporting all records
+2026-07-06 19:18:02.050 - AccuracyDataExporter - INFO - Accuracy results exported to /home/luke/Documents/Code/DFlash/artifacts/dflash/accuracy/math_500/accuracy_results.csv
+2026-07-06 19:18:02.051 - ExporterManager - INFO - Exporting console data
