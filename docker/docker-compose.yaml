@@ -1,0 +1,275 @@
+# Compose project name (prefixes containers/networks).
+name: llamacpp_qwen36_dflash
+
+networks:
+  server:
+    driver: bridge          # private bridge network shared by the services
+
+services:
+  llamacpp_dflash:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda13   # llama.cpp server, CUDA 13 build
+    container_name: LlamaCpp_Qwen36_DFlash
+    networks:
+      - server
+
+    ports:
+      - "${LLAMA_HOST_PORT:-8001}:8000"   # host:container (server listens on 8000)
+
+    ipc: host               # share host IPC (avoids small /dev/shm limit)
+    gpus: all               # expose all host GPUs
+
+    ulimits:
+      memlock: -1           # unlimited pinned memory for GPU transfers
+      stack: 67108864       # 64 MB thread stack
+      nofile:               # max open file descriptors
+        soft: 1048576
+        hard: 1048576
+
+    environment:
+      LLAMA_CACHE: /root/.cache/llama.cpp             # model cache path in container
+      HF_TOKEN: ${HF_TOKEN:-}                         # Hugging Face token for downloads
+      HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN:-}           # same token, HF library's name
+      CUDA_VISIBLE_DEVICES: "${CUDA_VISIBLE_DEVICES:-0}"  # GPU index(es) to use
+
+    volumes:
+      - ${HOME}/.cache/llama.cpp:/root/.cache/llama.cpp   # persist model cache on host
+
+    command:
+      # Main target model. Use the non-MTP GGUF target for DFlash.
+      - -hf
+      - ${LLAMA_MODEL:-unsloth/Qwen3.6-27B-GGUF:UD-Q4_K_XL}
+
+      # DFlash draft model. This is not a chat model; it is loaded as the draft.
+      # NOTE: must be a GGUF converted with the MERGED llama.cpp (arch "dflash").
+      # spiritbuun/Qwen3.6-27B-DFlash-GGUF was made on a pre-merge branch (arch
+      # "dflash-draft") and fails with "unknown model architecture: 'dflash-draft'".
+      - --spec-draft-hf
+      - ${LLAMA_DRAFT_REPO:-Alittlehammmer/Qwen3.6-27B-DFlash-GGUF-llama.cpp}
+      - --spec-draft-model
+      - ${LLAMA_DRAFT_FILE:-Qwen3.6-27B-DFlash-Q8_0.gguf}
+
+      # Server. --host/--port: bind address inside the container.
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      # --alias: model name reported to API clients.
+      - --alias
+      - qwen36-dflash15
+      # Context. -c: context size in tokens. Override per-run with LLAMA_CTX
+      # (e.g. LLAMA_CTX=32768 for accuracy runs); default is the model max (256k).
+      - -c
+      - "${LLAMA_CTX:-262144}"
+
+      # GPU placement. Single GPU on this box: no tensor-split needed.
+      - -ngl
+      - "-1"
+      - --spec-draft-ngl
+      - ${LLAMA_DRAFT_NGL:-all}
+
+      # KV cache type. Keep f16 (default) — quantized cache (q8_0) measured
+      # ~7x SLOWER for DFlash's batched draft-verification step on this
+      # llama.cpp build (215 tok/s f16 vs 29 tok/s q8_0, same ~34% draft
+      # acceptance). Both services fit comfortably in f16 at ctx 32768
+      # (~45 GB combined of 97 GB), so there is no VRAM reason to quantize.
+      # - --cache-type-k
+      # - "${LLAMA_CACHE_TYPE_K:-f16}"
+      # - --cache-type-v
+      # - "${LLAMA_CACHE_TYPE_V:-f16}"
+
+      # Flash attention.
+      - -fa
+      - "on"
+
+      # DFlash speculative decoding.
+      - --spec-type
+      # Currenltly maximum support of 15 
+      - draft-dflash
+      - --spec-draft-n-max
+      - "${LLAMA_SPEC_N:-15}"
+
+      # Start with one parallel slot for DFlash. Increase only after confirming stability.
+      - --parallel
+      - "${LLAMA_PARALLEL:-1}"
+
+      # Chat template. Disable thinking for better DFlash acceptance/speed.
+      # (--chat-template-kwargs '{"enable_thinking": false}' is deprecated.)
+      - --jinja
+      - --reasoning
+      - "off"
+
+      # DFlash multimodal/mmproj is not ready yet; keep text-only.
+      - --no-mmproj
+
+      # Metrics and logging.
+      - --metrics
+      - --log-verbosity
+      - "${LLAMA_VERBOSITY:-3}"
+
+    restart: unless-stopped
+
+  # Baseline: same main model without DFlash speculative decoding, for A/B testing.
+  llamacpp_baseline:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda13   # llama.cpp server, CUDA 13 build
+    container_name: LlamaCpp_Qwen36_Baseline
+    networks:
+      - server
+
+    ports:
+      - "${LLAMA_BASELINE_HOST_PORT:-8000}:8000"   # host:container (server listens on 8000)
+
+    ipc: host               # share host IPC (avoids small /dev/shm limit)
+    gpus: all               # expose all host GPUs
+
+    ulimits:
+      memlock: -1           # unlimited pinned memory for GPU transfers
+      stack: 67108864       # 64 MB thread stack
+      nofile:               # max open file descriptors
+        soft: 1048576
+        hard: 1048576
+
+    environment:
+      LLAMA_CACHE: /root/.cache/llama.cpp             # model cache path in container
+      HF_TOKEN: ${HF_TOKEN:-}                         # Hugging Face token for downloads
+      HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN:-}           # same token, HF library's name
+      CUDA_VISIBLE_DEVICES: "${CUDA_VISIBLE_DEVICES:-0}"  # GPU index(es) to use
+
+    volumes:
+      - ${HOME}/.cache/llama.cpp:/root/.cache/llama.cpp   # persist model cache on host
+
+    command:
+      # Same main model as the DFlash service; shares the host cache, so it is
+      # downloaded only once.
+      - -hf
+      - ${LLAMA_MODEL:-unsloth/Qwen3.6-27B-GGUF:UD-Q4_K_XL}
+
+      # Server. --host/--port: bind address inside the container.
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      # --alias: model name reported to API clients.
+      - --alias
+      - qwen3.6-27B
+
+      # Context. -c: context size in tokens. Keep identical to DFlash for a fair
+      # comparison. Override per-run with LLAMA_CTX (e.g. LLAMA_CTX=32768).
+      - -c
+      - "${LLAMA_CTX:-262144}"
+
+      # GPU placement. Single GPU on this box: no tensor-split needed.
+      - -ngl
+      - "-1"
+
+      # KV cache type. Keep f16 (default) — see the DFlash service for why
+      # q8_0 was tried and reverted (7x slower draft verification, and no
+      # VRAM need since both services fit comfortably in f16).
+      # - --cache-type-k
+      # - "${LLAMA_CACHE_TYPE_K:-f16}"
+      # - --cache-type-v
+      # - "${LLAMA_CACHE_TYPE_V:-f16}"
+
+      # Flash attention.
+      - -fa
+      - "on"
+
+      # --parallel: number of concurrent request slots.
+      - --parallel
+      - "${LLAMA_PARALLEL:-1}"
+
+      # Chat template. Same reasoning setting as the DFlash service.
+      - --jinja
+      - --reasoning
+      - "off"
+
+      - --no-mmproj
+
+      # Metrics and logging.
+      - --metrics
+      - --log-verbosity
+      - "${LLAMA_VERBOSITY:-3}"
+
+    restart: unless-stopped
+
+
+
+  llama_cpp_qwen36_mtp:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda13   # llama.cpp server, CUDA 13 build
+    container_name: LlamaCpp_Qwen36_27B_MTP_Server
+
+    networks:
+      - server
+
+    ports:
+      # Shares LLAMA_HOST_PORT with the dflash service: the two are mutually
+      # exclusive alternates (never run together), so both default to 8001.
+      - "${LLAMA_HOST_PORT:-8001}:8000"   # host:container (server listens on 8000)
+
+    gpus: all               # expose all host GPUs
+
+    ulimits:
+      memlock: -1           # unlimited pinned memory for GPU transfers
+      stack: 67108864       # 64 MB thread stack
+      nofile:               # max open file descriptors
+        soft: 1048576
+        hard: 1048576
+
+    environment:
+      LLAMA_CACHE: /root/.cache/llama.cpp             # model cache path in container
+      HF_TOKEN: ${HF_TOKEN:-}                         # Hugging Face token for downloads
+      HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN:-}           # same token, HF library's name
+      CUDA_VISIBLE_DEVICES: "${CUDA_VISIBLE_DEVICES:-0}"  # GPU index(es) to use
+
+    volumes:
+      - ${HOME}/.cache/llama.cpp:/root/.cache/llama.cpp   # persist model cache on host
+
+
+    command:
+      - -hf
+      - ${LLAMA_MODEL:-unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL}
+
+      # Server.
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      # Alias: Model name used in API requests
+      - --alias
+      - qwen3.6-27b-mtp8
+
+      # -ngl: Number of layers to offload to GPU (-1 = all layers)
+      - -ngl
+      - "-1"
+      # -c: Context size in tokens (max input + output length).
+      # Override per-run with LLAMA_CTX (e.g. LLAMA_CTX=32768 for accuracy runs).
+      - -c
+      - "${LLAMA_CTX:-262144}"
+      # -fa: Flash Attention for faster inference and lower VRAM"
+      - -fa
+      - "on"
+      # --parallel: number of concurrent request slots.
+      - --parallel
+      - "${LLAMA_PARALLEL:-1}"
+
+
+      # MTP Speculative Decoding: Predict multiple tokens at once for faster generation
+      # --spec-type: Use model's multi-token prediction heads
+      # --spec-draft-n-max: Max draft tokens to predict speculatively (2-4 recommended)
+      - --spec-type
+      - draft-mtp
+      - --spec-draft-n-max
+      - "8"
+            # Chat template. Same reasoning setting as the DFlash service.
+      - --jinja
+      - --reasoning
+      - "off"
+
+      - --no-mmproj
+
+      # --metrics: Enable Prometheus metrics endpoint at /metrics
+      - --metrics
+      - --log-verbosity
+      - "${LLAMA_VERBOSITY:-3}"
+
+
+    restart: unless-stopped

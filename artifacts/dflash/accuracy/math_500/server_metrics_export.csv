@@ -1,0 +1,20 @@
+# AIPerf Server Metrics Export (CSV)
+# aiperf_version: 0.11.0
+# schema_version: 1.0
+# benchmark_id: 226c0e0ecc26
+# Note: Same benchmark_id and version appear in JSON and Parquet exports
+#
+Endpoint,Type,Metric,Unit,avg,min,max,std,p1,p5,p10,p25,p50,p75,p90,p95,p99,Description
+localhost:8001,gauge,llamacpp:n_busy_slots_per_decode,,1.0000,1.0000,1.0000,0.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,Average number of busy slots per llama_decode() call
+localhost:8001,gauge,llamacpp:predicted_tokens_seconds,tokens/s,230.2062,218.3120,241.7720,5.7665,218.3120,220.5720,222.9462,226.0040,231.8660,232.4140,241.7720,241.7720,241.7720,Average generation throughput in tokens/s.
+localhost:8001,gauge,llamacpp:prompt_tokens_seconds,tokens/s,760.6801,706.6350,792.5150,22.2211,706.7500,730.0260,734.5030,738.9640,754.6250,783.8775,792.5150,792.5150,792.5150,Average prompt throughput in tokens/s.
+localhost:8001,gauge,llamacpp:requests_deferred,,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,Number of requests deferred.
+localhost:8001,gauge,llamacpp:requests_processing,,0.9914,0.0000,1.0000,0.0922,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,Number of requests processing.
+
+Endpoint,Type,Metric,Unit,total,rate,rate_avg,rate_min,rate_max,rate_std,Description
+localhost:8001,counter,llamacpp:n_decode,,9243.0000,33.9195,,,,,Total number of llama_decode() calls
+localhost:8001,counter,llamacpp:n_tokens_max,,9948.0000,36.5066,,,,,Largest observed n_tokens.
+localhost:8001,counter,llamacpp:prompt_seconds,seconds,5.2610,0.0193,,,,,Prompt process time
+localhost:8001,counter,llamacpp:prompt_tokens,tokens,4093.0000,15.0203,,,,,Number of prompt tokens processed.
+localhost:8001,counter,llamacpp:tokens_predicted,,59869.0000,219.7041,,,,,Number of generation tokens processed.
+localhost:8001,counter,llamacpp:tokens_predicted_seconds,seconds,261.5780,0.9599,,,,,Predict process time

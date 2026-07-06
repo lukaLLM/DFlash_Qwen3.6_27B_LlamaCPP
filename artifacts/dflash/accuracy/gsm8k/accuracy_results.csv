@@ -1,0 +1,3 @@
+task,correct,total,unparsed,accuracy
+OVERALL,25,50,50,0.5000
+gsm8k,25,50,50,0.5000

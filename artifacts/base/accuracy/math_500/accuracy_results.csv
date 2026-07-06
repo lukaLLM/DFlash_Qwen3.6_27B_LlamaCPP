@@ -1,0 +1,9 @@
+task,correct,total,unparsed,accuracy
+OVERALL,49,200,0,0.2450
+Algebra,12,52,0,0.2308
+Counting & Probability,4,15,0,0.2667
+Geometry,3,16,0,0.1875
+Intermediate Algebra,6,42,0,0.1429
+Number Theory,6,22,0,0.2727
+Prealgebra,11,32,0,0.3438
+Precalculus,7,21,0,0.3333

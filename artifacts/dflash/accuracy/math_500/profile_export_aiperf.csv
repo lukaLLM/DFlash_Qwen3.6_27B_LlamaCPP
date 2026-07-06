@@ -1,0 +1,58 @@
+Metric,avg,min,max,sum,p1,p5,p10,p25,p50,p75,p90,p95,p99,std
+E2E Output Token Throughput (tokens/sec/user),242.81,162.92,339.66,12140.38,165.88,180.67,184.19,204.98,236.15,280.87,300.77,314.13,333.15,45.72
+HTTP Blocked (ms),0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+HTTP Chunks Received,607.46,59.00,8004.00,30373.00,66.84,80.60,95.30,139.75,281.00,439.25,851.30,2622.00,5913.17,1269.23
+HTTP Chunks Sent,1.00,1.00,1.00,50.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,0.00
+HTTP Connecting (ms),0.26,0.22,0.84,13.22,0.22,0.22,0.23,0.23,0.24,0.26,0.28,0.32,0.72,0.10
+HTTP Connection Overhead (ms),0.27,0.22,0.88,13.51,0.22,0.22,0.23,0.23,0.24,0.26,0.28,0.32,0.86,0.12
+HTTP Connection Reused (ratio),0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+HTTP Data Received (KB),290.23,60.61,2478.71,14511.58,64.80,74.58,79.25,97.84,175.49,260.93,513.07,979.77,1921.49,400.48
+HTTP Data Sent (KB),0.34,0.17,0.90,17.06,0.17,0.19,0.21,0.24,0.29,0.38,0.57,0.63,0.79,0.15
+HTTP DNS Lookup (ms),0.01,0.00,0.29,0.29,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.15,0.04
+HTTP Duration (excl. conn) (ms),5442.15,1102.30,52436.05,272107.33,1196.32,1359.33,1537.01,1767.76,2989.12,4438.86,7973.79,21342.30,43377.22,8926.85
+HTTP Receiving (ms),5232.28,907.73,52234.99,261614.23,1014.03,1179.58,1304.59,1573.21,2796.54,4172.70,7707.84,21129.95,43156.50,8923.92
+HTTP Sending (ms),0.38,0.32,0.96,19.03,0.32,0.33,0.33,0.33,0.35,0.38,0.43,0.46,0.87,0.11
+HTTP Total Time (ms),5442.42,1102.54,52436.28,272120.85,1196.55,1359.57,1537.24,1768.00,2989.36,4439.09,7974.06,21342.53,43377.45,8926.83
+HTTP Waiting (TTFB) (ms),209.48,168.15,372.77,10474.08,168.66,171.67,179.06,186.16,194.17,216.29,247.36,282.40,365.58,41.16
+Input Sequence Length (tokens),69.86,10.00,363.00,3493.00,10.98,16.25,22.60,30.00,47.00,80.50,152.00,187.85,295.87,64.56
+Inter Chunk Latency (ms),4.38,0.00,36.07,261499.63,0.00,0.00,0.00,0.00,0.01,0.06,27.96,28.66,29.94,10.27
+Inter Token Latency (ms),3.94,2.70,6.10,196.94,2.73,2.93,3.12,3.26,3.95,4.32,5.04,5.33,5.91,0.78
+OSL Mismatch Diff % (%),-96.35,-99.25,-68.74,-4817.45,-99.19,-99.07,-99.01,-98.78,-97.80,-96.72,-93.53,-87.66,-75.79,5.05
+Output Sequence Length (tokens),1196.38,247.00,10243.00,59819.00,264.15,305.15,323.70,400.50,721.50,1075.25,2121.10,4044.85,7934.12,1654.99
+Output Token Count (tokens),1196.38,247.00,10243.00,59819.00,264.15,305.15,323.70,400.50,721.50,1075.25,2121.10,4044.85,7934.12,1654.99
+Output Token Throughput Per User (tokens/sec/user),263.46,164.06,370.97,13172.94,169.32,187.48,198.37,231.67,253.40,306.52,320.13,340.78,366.05,49.51
+Prefill Throughput Per User (tokens/sec/user),314.10,58.98,1012.55,15705.18,61.68,84.33,112.35,163.17,227.60,410.78,671.99,793.19,1000.15,232.46
+Request Latency (ms),5439.91,1102.35,52435.87,271995.57,1182.73,1359.33,1536.97,1767.73,2989.12,4438.89,7973.83,21342.24,43377.07,8927.57
+Time to First Output Token (ms),209.92,168.59,373.79,10495.94,169.07,172.05,179.55,186.55,194.56,216.75,247.81,282.82,366.30,41.20
+Time to First Token (ms),209.92,168.59,373.79,10495.94,169.07,172.05,179.55,186.55,194.56,216.75,247.81,282.82,366.30,41.20
+Time to Second Token (ms),30.70,29.37,32.63,1535.14,29.39,29.53,29.77,30.13,30.74,31.04,31.59,31.92,32.34,0.72
+
+Metric,Value
+Accuracy (Overall) (ratio),
+Accuracy (Algebra) (ratio),
+Accuracy (Counting & Probability) (ratio),
+Accuracy (Geometry) (ratio),
+Accuracy (Intermediate Algebra) (ratio),
+Accuracy (Number Theory) (ratio),
+Accuracy (Prealgebra) (ratio),
+Accuracy (Precalculus) (ratio),
+Accuracy Unparsed (Overall) (ratio),
+Accuracy Unparsed (Algebra) (ratio),
+Accuracy Unparsed (Counting & Probability) (ratio),
+Accuracy Unparsed (Geometry) (ratio),
+Accuracy Unparsed (Intermediate Algebra) (ratio),
+Accuracy Unparsed (Number Theory) (ratio),
+Accuracy Unparsed (Prealgebra) (ratio),
+Accuracy Unparsed (Precalculus) (ratio),
+Benchmark Duration (sec),272.49
+OSL Mismatch Count,50.00
+Output Token Throughput (tokens/sec),219.53
+Request Count,50.00
+Request Throughput (requests/sec),0.18
+Total Input Sequence Length (tokens),3493.00
+Total Output Sequence Length (tokens),59819.00
+Total Output Tokens (tokens),59819.00
+Total Token Throughput (tokens/sec),232.35
+
+
+Endpoint,GPU_Index,GPU_Name,GPU_UUID,Metric,avg,min,max,sum,p1,p5,p10,p25,p50,p75,p90,p95,p99,std

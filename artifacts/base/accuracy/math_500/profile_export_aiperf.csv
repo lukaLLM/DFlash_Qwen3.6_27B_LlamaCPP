@@ -1,0 +1,63 @@
+Metric,avg,min,max,sum,p1,p5,p10,p25,p50,p75,p90,p95,p99,std
+E2E Output Token Throughput (tokens/sec/user),72.15,67.52,73.36,4905.95,68.07,69.47,70.07,71.50,72.80,73.16,73.28,73.32,73.35,1.39
+Error Input Sequence Length (tokens),75.00,8.00,694.00,9900.00,14.31,18.55,22.00,30.00,49.00,77.50,153.00,223.90,454.01,90.42
+HTTP Blocked (ms),0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+HTTP Chunks Received,7956.35,920.00,32769.00,541032.00,938.09,1134.60,1277.70,1991.75,4453.00,11250.25,22238.60,26833.65,32769.00,8762.63
+HTTP Chunks Sent,1.00,1.00,1.00,68.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,0.00
+HTTP Connecting (ms),0.29,0.20,0.64,19.39,0.20,0.21,0.21,0.22,0.24,0.36,0.40,0.43,0.56,0.09
+HTTP Connection Overhead (ms),0.33,0.20,0.96,22.70,0.20,0.21,0.21,0.22,0.24,0.50,0.57,0.60,0.78,0.17
+HTTP Connection Reused (ratio),0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+HTTP Data Received (KB),1965.05,227.58,8108.53,133623.19,231.83,279.59,315.00,491.64,1097.25,2777.00,5489.78,6630.99,8106.68,2166.94
+HTTP Data Sent (KB),0.32,0.17,0.90,22.01,0.17,0.18,0.19,0.23,0.28,0.37,0.55,0.59,0.75,0.14
+HTTP DNS Lookup (ms),0.05,0.00,0.32,3.31,0.00,0.00,0.00,0.00,0.00,0.13,0.16,0.18,0.23,0.08
+HTTP Duration (excl. conn) (ms),111422.29,12706.23,467306.92,7576715.97,13590.13,15949.95,17510.48,27166.81,60825.31,160828.74,312413.97,379258.93,467172.39,124411.47
+HTTP Receiving (ms),111134.62,12461.62,466894.08,7557153.94,13186.88,15760.46,17317.07,26995.21,60605.00,160547.68,312109.54,378922.67,466811.84,124385.96
+HTTP Sending (ms),0.40,0.30,0.87,26.86,0.30,0.30,0.31,0.32,0.35,0.47,0.51,0.56,0.77,0.11
+HTTP Total Time (ms),111422.63,12706.45,467307.40,7576738.66,13590.37,15950.17,17510.84,27167.02,60825.55,160829.06,312414.33,379259.27,467172.69,124411.47
+HTTP Waiting (TTFB) (ms),287.28,152.24,700.72,19535.17,155.56,162.26,171.34,192.20,226.32,340.40,536.78,610.32,688.35,144.68
+Input Sequence Length (tokens),64.28,10.00,363.00,4371.00,11.34,14.70,19.70,28.75,47.50,78.25,124.90,175.95,271.21,57.88
+Inter Chunk Latency (ms),13.97,13.27,46.06,7556240.43,13.46,13.50,13.52,13.60,13.86,14.22,14.57,14.77,15.23,0.55
+Inter Token Latency (ms),13.78,13.55,14.43,937.09,13.55,13.56,13.56,13.57,13.62,13.95,14.25,14.31,14.42,0.28
+OSL Mismatch Diff % (%),-75.72,-97.20,0.00,-5149.06,-97.14,-96.54,-96.10,-93.92,-86.41,-65.67,-32.14,-18.12,0.00,26.74
+Output Sequence Length (tokens),7955.60,919.00,32768.00,540981.00,937.09,1132.95,1276.70,1990.75,4452.00,11249.25,22237.60,26832.00,32768.00,8762.49
+Output Token Count (tokens),487.35,114.00,986.00,31678.00,131.92,162.80,212.20,275.00,484.00,634.00,797.00,923.80,958.48,226.10
+Output Token Throughput Per User (tokens/sec/user),72.59,69.32,73.80,4936.38,69.33,69.90,70.19,71.68,73.40,73.72,73.76,73.77,73.78,1.43
+Prefill Throughput Per User (tokens/sec/user),256.72,24.11,1501.83,17456.93,34.66,47.35,72.46,119.18,169.65,304.01,573.90,649.29,1181.41,243.31
+Reasoning Token Count (tokens),7489.75,766.00,32768.00,509303.00,778.06,935.55,1041.80,1761.00,3764.50,10360.75,21517.20,26061.90,32768.00,8742.18
+Request Latency (ms),111408.91,12692.71,467306.55,7575806.09,13576.33,15936.23,17496.92,27153.21,60811.62,160813.89,312399.16,379243.79,467171.95,124412.85
+Time to First Output Token (ms),88193.42,10638.45,368111.07,5732572.07,11333.00,12827.62,14454.91,23561.67,44457.34,107884.17,253257.71,304575.23,367848.55,98762.99
+Time to First Token (ms),287.73,153.23,701.27,19565.65,156.13,162.63,171.70,192.62,226.81,340.86,537.31,610.88,688.92,144.73
+Time to Second Token (ms),14.82,14.55,16.20,1008.05,14.56,14.61,14.62,14.67,14.73,14.84,15.22,15.46,15.77,0.28
+
+Metric,Value
+Accuracy (Overall) (ratio),
+Accuracy (Algebra) (ratio),
+Accuracy (Counting & Probability) (ratio),
+Accuracy (Geometry) (ratio),
+Accuracy (Intermediate Algebra) (ratio),
+Accuracy (Number Theory) (ratio),
+Accuracy (Prealgebra) (ratio),
+Accuracy (Precalculus) (ratio),
+Accuracy Unparsed (Overall) (ratio),
+Accuracy Unparsed (Algebra) (ratio),
+Accuracy Unparsed (Counting & Probability) (ratio),
+Accuracy Unparsed (Geometry) (ratio),
+Accuracy Unparsed (Intermediate Algebra) (ratio),
+Accuracy Unparsed (Number Theory) (ratio),
+Accuracy Unparsed (Prealgebra) (ratio),
+Accuracy Unparsed (Precalculus) (ratio),
+Benchmark Duration (sec),7579.71
+Error Request Count,132.00
+OSL Mismatch Count,65.00
+Output Token Throughput (tokens/sec),71.37
+Request Count,68.00
+Request Throughput (requests/sec),0.01
+Total Error Input Sequence Length (tokens),9900.00
+Total Input Sequence Length (tokens),4371.00
+Total Output Sequence Length (tokens),540981.00
+Total Output Tokens (tokens),31678.00
+Total Reasoning Tokens (tokens),509303.00
+Total Token Throughput (tokens/sec),71.95
+
+
+Endpoint,GPU_Index,GPU_Name,GPU_UUID,Metric,avg,min,max,sum,p1,p5,p10,p25,p50,p75,p90,p95,p99,std
