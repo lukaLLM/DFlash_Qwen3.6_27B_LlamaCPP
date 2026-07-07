@@ -88,19 +88,19 @@ sweep above - see [Speed leaderboard](#speed-leaderboard-benchmarkleaderboardpy)
 
 | Run | Type | n_max | avg tok/s | median | accept % | Speedup |
 |---|---|---:|---:|---:|---:|---:|
-| qwen3.6-27B | baseline | - | 70.34 | 70.38 | - | 1.00× |
-| qwen36-dflash2 | dflash | 2 | 141.01 | 141.12 | 91.1 | 2.00× |
-| qwen36-dflash4 | dflash | 4 | 178.34 | 179.65 | 80.4 | 2.54× |
-| qwen36-dflash8 | dflash | 8 | 236.15 | 239.06 | 63.1 | 3.36× |
-| **qwen36-dflash12** | dflash | 12 | **256.01** | 258.54 | 50.5 | **3.64×** |
-| qwen36-dflash15 | dflash | 15 | 253.21 | 256.35 | 42.8 | 3.60× |
-| qwen36-dflash15reason | dflash | 15 | 224.18 | 225.30 | 36.4 | 3.19× |
-| qwen3.6-27b-mtp2 | mtp | 2 | 142.68 | 142.48 | 88.5 | 2.03× |
-| qwen3.6-27b-mtp4 | mtp | 4 | 167.47 | 167.70 | 79.8 | 2.38× |
-| qwen3.6-27b-mtp8 | mtp | 8 | 190.17 | 191.48 | 57.9 | 2.70× |
-| qwen3.6-27b-mtp12 | mtp | 12 | 179.03 | 180.29 | 43.3 | 2.55× |
-| qwen3.6-27b-mtp15 | mtp | 15 | 167.00 | 168.25 | 36.0 | 2.37× |
-| qwen3.6-27b-mtp15reason | mtp | 15 | 163.12 | 163.60 | 34.4 | 2.32× |
+| qwen36-dflash12 | dflash | 12 | 256.01 | 258.54 | 50.5 | 3.64x |
+| qwen36-dflash15 | dflash | 15 | 253.21 | 256.35 | 42.8 | 3.60x |
+| qwen36-dflash8 | dflash | 8 | 236.15 | 239.06 | 63.1 | 3.36x |
+| qwen36-dflash15reason | dflash | 15 | 224.18 | 225.30 | 36.4 | 3.19x |
+| qwen3.6-27b-mtp8 | mtp | 8 | 190.17 | 191.48 | 57.9 | 2.70x |
+| qwen3.6-27b-mtp12 | mtp | 12 | 179.03 | 180.29 | 43.3 | 2.55x |
+| qwen36-dflash4 | dflash | 4 | 178.34 | 179.65 | 80.4 | 2.54x |
+| qwen3.6-27b-mtp4 | mtp | 4 | 167.47 | 167.70 | 79.8 | 2.38x |
+| qwen3.6-27b-mtp15 | mtp | 15 | 167.00 | 168.25 | 36.0 | 2.37x |
+| qwen3.6-27b-mtp15reason | mtp | 15 | 163.12 | 163.60 | 34.4 | 2.32x |
+| qwen3.6-27b-mtp2 | mtp | 2 | 142.68 | 142.48 | 88.5 | 2.03x |
+| qwen36-dflash2 | dflash | 2 | 141.01 | 141.12 | 91.1 | 2.00x |
+| qwen3.6-27B | baseline | - | 70.34 | 70.38 | - | 1.00x |
 
 Best config: **dflash12** - throughput peaks at n_max=12 and dips slightly at
 15, and DFlash beats MTP at every draft length.
