@@ -11,7 +11,7 @@ how I fixed it" log, and the config knobs live in [`DFLASH.md`](DFLASH.md).
 
 LOCAL AI / SPECULATIVE DECODING SERIES:
 
-- Episode 1: DFlash on llama.cpp - _[title TBD]_ - _[YouTube link TBD]_
+- Up to 6x Faster AI? DFlash Explained, Deployed & Benchmarked on Qwen 3.6 27B. Lamma.cpp! https://www.youtube.com/watch?v=TUdihA_dJjo 
 
 ## Hardware
 
