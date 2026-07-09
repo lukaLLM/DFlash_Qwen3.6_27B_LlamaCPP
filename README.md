@@ -7,6 +7,8 @@ decoding is output-lossless, the questions these benchmarks answer are: *how muc
 faster is DFlash, and does it cost any accuracy?* Full setup, the "what broke and
 how I fixed it" log, and the config knobs live in [`DFLASH.md`](DFLASH.md).
 
+We discuss it here https://www.reddit.com/r/LocalLLaMA/comments/1uq0h4o/i_tested_freshly_merged_dflash_in_llamacpp_on/
+
 ## YouTube
 
 LOCAL AI / SPECULATIVE DECODING SERIES:
