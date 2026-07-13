@@ -324,7 +324,7 @@ services:
       - --port
       - "8000"
       - --alias
-      - "${LLAMA_ALIAS:-qwen36-dflash-map-k4v}"   # leaderboard groups runs by this name
+      - "${LLAMA_ALIAS:-qwen36-dflash-ngram}"   # leaderboard groups runs by this name
       - -c
       - "${LLAMA_CTX:-256000}"
 
@@ -338,18 +338,23 @@ services:
       - -fa
       - "on"
 
-      # === Speculative stack: DFlash + two n-gram lookup drafters =============
+      # === Speculative stack: DFlash + n-gram lookup drafters =================
       # Comma-separated = STACKED drafters. DFlash proposes from the draft model;
       # the n-gram drafters cheaply extend the draft with verbatim spans copied
       # from context (big win on code / JSON / repeated text). The target verifies
       # every proposed token in one pass, so it stays output-lossless at temp 0 -
       # extra drafters can only add speed or waste a little, never change outputs.
-      # Ablate via LLAMA_SPEC_TYPE:
-      #   draft-dflash                           control (no n-gram)
-      #   draft-dflash,ngram-mod                 + mod lookup only
-      #   draft-dflash,ngram-mod,ngram-map-k4v   full stack (default)
+      # Full --spec-type menu in this build (b9859):
+      #   draft models : draft-simple  draft-eagle3  draft-mtp  draft-dflash
+      #   n-gram lookup: ngram-simple  ngram-map-k  ngram-map-k4v  ngram-mod
+      #                  ngram-cache   (no tuning flags)
+      # Ablate via LLAMA_SPEC_TYPE (bench_ngram results, decode tok/s):
+      #   draft-dflash                           control, no n-gram   (199)
+      #   draft-dflash,ngram-map-k4v             + k4v only           (201)
+      #   draft-dflash,ngram-mod                 + mod only           (304)
+      #   draft-dflash,ngram-mod,ngram-map-k4v   full stack (default) (321)
       - --spec-type
-      - "${LLAMA_SPEC_TYPE:-draft-dflash,ngram-map-k4v}"
+      - "${LLAMA_SPEC_TYPE:-draft-dflash,ngram-mod,ngram-map-k4v}"
 
       # DFlash draft length. 15 is this build's max supported - use the ceiling.
       - --spec-draft-n-max
@@ -357,7 +362,9 @@ services:
       # Offload draft sampling to the GPU backend (default on) - keep for speed.
       - --spec-draft-backend-sampling
 
-      # ngram-mod tuning (defaults; only active when ngram-mod is in --spec-type)
+      # Per-drafter tuning below ships the build's defaults, env-overridable.
+      # Each block is inert unless its drafter is listed in --spec-type.
+      # ngram-mod tuning
       - --spec-ngram-mod-n-match      # lookup context length            (def 24)
       - "${LLAMA_NGRAM_MOD_MATCH:-24}"
       - --spec-ngram-mod-n-min        # min tokens drafted from a match  (def 48)
@@ -371,6 +378,8 @@ services:
       - "${LLAMA_NGRAM_K4V_M:-48}"
       - --spec-ngram-map-k4v-min-hits # min matches before drafting      (def 1)
       - "${LLAMA_NGRAM_K4V_HITS:-1}"
+      # (ngram-simple / ngram-map-k / ngram-cache: enable via LLAMA_SPEC_TYPE;
+      #  their tuning flags all default sensibly, so none are passed here)
       # =======================================================================
 
       # KV cache type. Default f16 = the fast path. Measured on THIS config

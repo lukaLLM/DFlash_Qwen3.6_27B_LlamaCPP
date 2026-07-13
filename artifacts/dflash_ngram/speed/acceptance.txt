@@ -2,3 +2,4 @@ osl=512 draft 288/3301 accepted (9%), 75.7 tok/s
 osl=4096 draft 2427/19836 accepted (12%), 93.2 tok/s
 osl=12288 draft 2480/18183 accepted (14%), 100.8 tok/s
 osl=36864 draft 2472/17133 accepted (14%), 105.2 tok/s
+osl=36864 draft 2431/22875 accepted (11%), 88.5 tok/s

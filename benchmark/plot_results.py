@@ -166,11 +166,17 @@ def plot_speed_vs_context(tables: dict) -> None:
         ax.plot([p[0] for p in pts], [p[1] for p in pts], "o", color=color,
                 markersize=8, markeredgecolor=SURFACE, markeredgewidth=2, zorder=4)
 
-    for x, y, s in zip(xs, ngram, speedup):
-        if y is not None and s is not None:
-            ax.annotate(f"{s:.1f}×", (x, y), xytext=(0, 12),
-                        textcoords="offset points", ha="center",
-                        fontsize=10, color=INK_2, fontweight="bold")
+    for x, y, s, d, b in zip(xs, ngram, speedup, dflash, base):
+        if y is None or s is None:
+            continue
+        # above the marker normally; below when DFlash sits higher - but only
+        # if there is room before the base line, else skip the label
+        above = d is None or y >= d
+        if not above and b is not None and (y - b) < 40:
+            continue
+        ax.annotate(f"{s:.1f}×", (x, y), xytext=(0, 12 if above else -22),
+                    textcoords="offset points", ha="center",
+                    fontsize=10, color=INK_2, fontweight="bold")
     for ys in (base, dflash, ngram):
         if ys[-1] is not None:
             ax.annotate(f"{ys[-1]:.0f}", (len(ctx) - 1, ys[-1]), xytext=(14, -3),
@@ -179,9 +185,10 @@ def plot_speed_vs_context(tables: dict) -> None:
     ax.set_xticks(list(xs))
     ax.set_xticklabels([fmt_ctx(c) for c in ctx])
     ax.set_xlim(-0.35, len(ctx) - 0.45)
-    ax.set_ylim(0, 380)
+    ymax = max(v for ys in (base, dflash, ngram) for v in ys if v is not None)
+    ax.set_ylim(0, ymax * 1.14)
     ax.set_xlabel("context size (input = output tokens)", color=MUTED, fontsize=9)
-    ax.set_ylabel("generation tok/s (E2E per user)", color=MUTED, fontsize=9)
+    ax.set_ylabel("generation tok/s (prefill + decode, per user)", color=MUTED, fontsize=9)
     ax.set_title("Speculative decoding vs context size",
                  color=INK, fontsize=13, fontweight="bold", loc="left", pad=16)
     ax.text(0, 1.02, "aiperf synthetic sweep, greedy, concurrency 1 — Qwen3.6-27B, RTX PRO 6000 · ×= ngram speedup vs base",
@@ -304,12 +311,14 @@ def plot_ngram_ablation(tables: dict) -> None:
     ax.set_title("n-gram lookup doubles DFlash on iterative coding",
                  color=INK, fontsize=13, fontweight="bold", loc="left", pad=16)
     ax.text(0, 1.02,
-            "bench_ngram — 18-turn cumulative coding session; maint = turns 10-18, editing the existing code",
+            "bench_ngram: the model builds a Gradio app over turns 1-9, then edits its own code in turns 10-18",
             transform=ax.transAxes, fontsize=9, color=INK_2)
     ax.legend(handles=[
-        plt.Line2D([], [], marker="s", linestyle="", markersize=9, color=BLUE, label="whole session"),
-        plt.Line2D([], [], marker="s", linestyle="", markersize=9, color=GREEN, label="maint phase"),
-    ], loc="upper right", frameon=False, fontsize=10, labelcolor=INK_2)
+        plt.Line2D([], [], marker="s", linestyle="", markersize=9, color=BLUE,
+                   label="all 18 turns (build + edit)"),
+        plt.Line2D([], [], marker="s", linestyle="", markersize=9, color=GREEN,
+                   label="turns 10-18 only (editing existing code)"),
+    ], loc="upper right", frameon=False, fontsize=9, labelcolor=INK_2)
 
     fig.tight_layout()
     fig.savefig(ASSETS / "ngram_ablation.png", facecolor=SURFACE)

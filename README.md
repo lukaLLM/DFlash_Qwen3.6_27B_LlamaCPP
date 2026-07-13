@@ -105,30 +105,38 @@ outputs at `--parallel 1` - the server processes requests one at a time.)
 ![Speculative decoding vs context size](assets/speed_vs_context.png)
 
 aiperf synthetic sweep (ISL = OSL, greedy, concurrency 1, 3-30 requests per
-size - fewer as size grows); tok/s = E2E per-user throughput (includes TTFT).
-Artifacts in `artifacts/{base,dflash,dflash_ngram}/speed/`.
+size - fewer as size grows); tok/s = `OSL / (TTFT + OSL × avg ITL)` per user -
+the same definition for every column. Artifacts in
+`artifacts/{base,dflash,dflash_ngram}/speed/`.
 [How the synthetic benchmark works](#how-the-synthetic-benchmark-works-islosl-greedy).
 
 | Context (ISL=OSL) | base tok/s | DFlash tok/s | +ngram tok/s | DFlash speedup | ngram speedup | base ITL (ms) | DFlash ITL (ms) | ngram ITL (ms) |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 512 | 67.62 | 98.66 | 94.88 | **1.46×** | 1.40× | 14.20 | 9.62 | 10.19 |
-| 4 096 | 67.53 | 189.90 | **244.75** | 2.81× | **3.62×** | 14.46 | 5.08 | 3.91 |
-| 12 288 | 64.78 | 237.40 | **329.40** | 3.66× | **5.08×** | 15.11 | 4.17 | 2.66 |
-| 36 864 | 61.47 | 115.78 | 127.80 | 1.88× | 2.08× | 15.91 | 4.98 | 4.14 |
+| 512 | 67.62 | 96.98 | 91.85 | **1.43×** | 1.36× | 14.20 | 9.62 | 10.19 |
+| 4 096 | 67.53 | 182.19 | **231.44** | 2.70× | **3.43×** | 14.46 | 5.08 | 3.91 |
+| 12 288 | 64.78 | 220.31 | **327.99** | 3.40× | **5.06×** | 15.11 | 4.17 | 2.66 |
+| 36 864 | 61.47 | 246.21 | **520.87** | 4.01× | **8.47×** | 15.91 | 3.68 | 1.51 |
 
 DFlash with reasoning on measured 96.61 / 166.64 / 240.41 tok/s at
 512 / 4 096 / 12 288, and 241.44 at 98 304.
 
-Two caveats on this table:
+Caveats on this table (both 36 864 points re-measured 2026-07-13):
 
-- **The 36 864 point was re-run in July 2026 and came back much slower** than
-  the originally recorded measurement (E2E 273.04 tok/s, ITL 3.26 ms - still in
-  git history). The current artifact shows ITL 4.98 ms plus long stalls that
-  drag E2E to 115.78. Worth re-running that point before quoting it.
-- **Synthetic prompts are the n-gram worst case**: random tokens give the
-  lookup drafters almost nothing to copy (draft accept 9-14% here), yet +ngram
-  still leads at 4K/12K. Its real win is multi-turn coding - see the
-  [iterative-coding ablation](#iterative-coding---the-n-gram-ablation-bench_ngram).
+- **DFlash 36 864**: the fresh run confirms the fast path - ITL 3.68 ms,
+  272 tok/s per-user decode, matching the originally recorded 273.04
+  (ITL 3.26) and disproving an anomalous earlier artifact (4.98 ms). The
+  server EOS'd at ~8.2k output tokens on this run.
+- **ngram 36 864 (8.47×) is a best-case ceiling, not typical.** The full
+  stack was confirmed via `docker inspect`, but three asymmetries inflate it:
+  the ngram service runs ctx 256k vs DFlash's 40960; the ngram run generated
+  the full 36 864 tokens while the DFlash run stopped at 8.2k; and greedy
+  36k-token synthetic output degenerates into repetition - exactly what the
+  n-gram drafters copy (on a short probe they added zero drafts over plain
+  DFlash). The realistic multi-turn number is the
+  [iterative-coding ablation](#iterative-coding---the-n-gram-ablation-bench_ngram) (~6×).
+- **Synthetic prompts are otherwise the n-gram worst case**: random tokens
+  give the lookup drafters almost nothing to copy (draft accept 9-14% on the
+  shorter sizes), yet +ngram still leads at 4K/12K.
 
 ### Leaderboard runs (`benchmark/leaderboard_runs.csv`)
 

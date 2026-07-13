@@ -90,3 +90,148 @@
 2026-07-10 14:30:57.376 - system_controller - INFO - All results received, initiating shutdown
 2026-07-10 14:30:58.111 - ExporterManager - INFO - Exporting all records
 2026-07-10 14:30:58.133 - ExporterManager - INFO - Exporting console data
+2026-07-13 21:06:48.457 - GPUTelemetryJSONLWriter_dd9377b2 - INFO - GPU telemetry export enabled: /home/luke/Documents/Code/DFlash/artifacts/dflash_ngram/speed/isl36864_osl36864/gpu_telemetry_export.jsonl
+2026-07-13 21:06:48.464 - OTelMetricsResultsProcessor_6cd5429e - INFO - Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-07-13 21:06:48.464 - records_manager - INFO - OTel metrics streamer is disabled and will not be used: Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-07-13 21:06:48.464 - RecordExportResultsProcessor_b55a64c5 - INFO - Record metrics export enabled: /home/luke/Documents/Code/DFlash/artifacts/dflash_ngram/speed/isl36864_osl36864/profile_export.jsonl
+2026-07-13 21:06:48.465 - system_controller - INFO - Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager')
+2026-07-13 21:06:48.467 - system_controller - INFO - Registered Dataset Manager (id: 'dataset_manager')
+2026-07-13 21:06:48.473 - server_metrics_manager - INFO - Server Metrics: Discovered 1 endpoints: ['http://localhost:8001/metrics']
+2026-07-13 21:06:48.477 - system_controller - INFO - Registered Server Metrics Manager (id: 'server_metrics_manager')
+2026-07-13 21:06:48.551 - system_controller - INFO - Registered Records Manager (id: 'records_manager')
+2026-07-13 21:06:48.568 - system_controller - INFO - Registered Worker Manager (id: 'worker_manager')
+2026-07-13 21:06:48.583 - system_controller - INFO - Registered Record Processor (id: 'record_processor_c2364019')
+2026-07-13 21:06:48.604 - system_controller - INFO - Registered Timing Manager (id: 'timing_manager')
+2026-07-13 21:06:48.713 - system_controller - INFO - Registered Worker (id: 'worker_3f6be158')
+2026-07-13 21:06:48.959 - system_controller - INFO - AIPerf System is CONFIGURING
+2026-07-13 21:06:48.959 - system_controller - INFO - Configuring all services to start profiling
+2026-07-13 21:06:48.960 - timing_manager - INFO - Waiting for dataset to be configured before configuring timing
+2026-07-13 21:06:48.960 - dataset_manager - INFO - Configuring tokenizer(s) for dataset manager
+2026-07-13 21:06:48.960 - InferenceResultParser_6a39bd2d - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-07-13 21:06:49.027 - server_metrics_manager - INFO - Server Metrics: Capturing baseline metrics...
+2026-07-13 21:06:49.028 - system_controller - INFO - Server metrics enabled - 1/1 endpoint(s) reachable.
+2026-07-13 21:06:49.032 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9400/metrics is not reachable
+2026-07-13 21:06:49.033 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9401/metrics is not reachable
+2026-07-13 21:06:49.033 - system_controller - INFO - DCGM telemetry skipped: no DCGM endpoints reachable
+2026-07-13 21:06:51.167 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:06:51.167 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:06:51.167 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-13 21:06:51.167 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-13 21:06:51.182 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/config.json "HTTP/1.1 200 OK"
+2026-07-13 21:06:51.192 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/config.json "HTTP/1.1 200 OK"
+2026-07-13 21:06:51.382 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:06:51.383 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:06:51.397 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:06:51.398 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:06:51.600 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:06:51.600 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:06:51.612 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:06:51.663 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:06:51.817 - system_controller - WARNING - Signal 2 received, initiating graceful shutdown
+2026-07-13 21:06:51.818 - system_controller - WARNING - Graceful shutdown requested (signal 2)
+2026-07-13 21:06:51.818 - records_manager - WARNING - Received profile cancel command: {"message_type":"command","service_id":"system_controller","command":"profile_cancel","command_id":"5e6906d1-58ad-45e3-b26a-52bf6ed536e6"}
+2026-07-13 21:06:51.818 - timing_manager - WARNING - Received profile cancel command: {"message_type":"command","service_id":"system_controller","command":"profile_cancel","command_id":"5e6906d1-58ad-45e3-b26a-52bf6ed536e6"}
+2026-07-13 21:06:51.818 - records_manager - INFO - Processing records results...
+2026-07-13 21:06:51.819 - records_manager - WARNING - Skipping efficiency metrics for phase profiling: start_ns=None, requests_end_ns=None
+2026-07-13 21:06:51.819 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-13 21:06:51.819 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-13 21:06:52.035 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-13 21:06:52.035 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-13 21:06:52.484 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B "HTTP/1.1 200 OK"
+2026-07-13 21:06:52.685 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B "HTTP/1.1 200 OK"
+2026-07-13 21:06:52.783 - system_controller - WARNING - Signal 2 received, initiating graceful shutdown
+2026-07-13 21:06:52.784 - system_controller - WARNING - Force quit requested (signal 2)
+2026-07-13 21:06:52.784 - system_controller - ERROR - Killing SystemController (id=system_controller)
+2026-07-13 21:06:52.856 - system_controller - ERROR - No profile results to export
+2026-07-13 21:20:44.557 - GPUTelemetryJSONLWriter_b2e70bd9 - INFO - GPU telemetry export enabled: /home/luke/Documents/Code/DFlash/artifacts/dflash_ngram/speed/isl36864_osl36864/gpu_telemetry_export.jsonl
+2026-07-13 21:20:44.563 - OTelMetricsResultsProcessor_a4103b08 - INFO - Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-07-13 21:20:44.563 - records_manager - INFO - OTel metrics streamer is disabled and will not be used: Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-07-13 21:20:44.564 - RecordExportResultsProcessor_e05aba3d - INFO - Record metrics export enabled: /home/luke/Documents/Code/DFlash/artifacts/dflash_ngram/speed/isl36864_osl36864/profile_export.jsonl
+2026-07-13 21:20:44.564 - system_controller - INFO - Registered Worker Manager (id: 'worker_manager')
+2026-07-13 21:20:44.565 - system_controller - INFO - Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager')
+2026-07-13 21:20:44.565 - system_controller - INFO - Registered Dataset Manager (id: 'dataset_manager')
+2026-07-13 21:20:44.572 - server_metrics_manager - INFO - Server Metrics: Discovered 1 endpoints: ['http://localhost:8001/metrics']
+2026-07-13 21:20:44.574 - system_controller - INFO - Registered Server Metrics Manager (id: 'server_metrics_manager')
+2026-07-13 21:20:44.583 - system_controller - INFO - Registered Record Processor (id: 'record_processor_f8250db7')
+2026-07-13 21:20:44.661 - system_controller - INFO - Registered Records Manager (id: 'records_manager')
+2026-07-13 21:20:44.723 - system_controller - INFO - Registered Timing Manager (id: 'timing_manager')
+2026-07-13 21:20:44.729 - system_controller - INFO - Registered Worker (id: 'worker_b87dd718')
+2026-07-13 21:20:45.058 - system_controller - INFO - AIPerf System is CONFIGURING
+2026-07-13 21:20:45.059 - system_controller - INFO - Configuring all services to start profiling
+2026-07-13 21:20:45.059 - timing_manager - INFO - Waiting for dataset to be configured before configuring timing
+2026-07-13 21:20:45.059 - InferenceResultParser_4acaa777 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-07-13 21:20:45.059 - dataset_manager - INFO - Configuring tokenizer(s) for dataset manager
+2026-07-13 21:20:45.062 - server_metrics_manager - INFO - Server Metrics: Capturing baseline metrics...
+2026-07-13 21:20:45.069 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9400/metrics is not reachable
+2026-07-13 21:20:45.126 - system_controller - INFO - Server metrics enabled - 1/1 endpoint(s) reachable.
+2026-07-13 21:20:45.130 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9401/metrics is not reachable
+2026-07-13 21:20:45.131 - system_controller - INFO - DCGM telemetry skipped: no DCGM endpoints reachable
+2026-07-13 21:20:47.386 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:20:47.401 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/config.json "HTTP/1.1 200 OK"
+2026-07-13 21:20:47.640 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:20:47.642 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-13 21:20:47.655 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:20:47.728 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:20:47.728 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-07-13 21:20:47.894 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:20:47.894 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/config.json "HTTP/1.1 200 OK"
+2026-07-13 21:20:47.906 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:20:48.146 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:20:48.146 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-13 21:20:48.161 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:20:48.393 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-13 21:20:48.393 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qwen/Qwen3.6-27B/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-07-13 21:20:48.407 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qwen/Qwen3.6-27B/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-07-13 21:20:48.644 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-07-13 21:20:48.892 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-07-13 21:20:48.893 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B "HTTP/1.1 200 OK"
+2026-07-13 21:20:48.894 - InferenceResultParser_4acaa777 - INFO - Initialized tokenizers: {'qwen36-dflash-map-k4v': {'class': 'Qwen2Tokenizer', 'name_or_path': 'Qwen/Qwen3.6-27B'}} in 3.83 seconds
+2026-07-13 21:20:49.390 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qwen/Qwen3.6-27B "HTTP/1.1 200 OK"
+2026-07-13 21:20:49.392 - dataset_manager - INFO - Tokenizer(s) configured in 4.33 seconds
+2026-07-13 21:20:49.392 - dataset_manager - INFO - Configuring dataset for dataset_manager
+2026-07-13 21:20:49.601 - MemoryMapDatasetBackingStore_a7c6da37 - INFO - Memory-mapped backing store initialized (streaming to /tmp/aiperf_mmap_f9c3b0af4586/dataset.dat)
+2026-07-13 21:20:49.602 - MemoryMapDatasetBackingStore_a7c6da37 - INFO - Data file finalized: 3 conversations, 0.46 MB
+2026-07-13 21:20:49.602 - MemoryMapDatasetBackingStore_a7c6da37 - INFO - Index file created: /tmp/aiperf_mmap_f9c3b0af4586/index.dat
+2026-07-13 21:20:49.602 - dataset_manager - INFO - Backing store finalized: client_type=DatasetClientStoreType.MEMORY_MAP data_file_path=PosixPath('/tmp/aiperf_mmap_f9c3b0af4586/dataset.dat') index_file_path=PosixPath('/tmp/aiperf_mmap_f9c3b0af4586/index.dat') conversation_count=3 total_size_bytes=480702 compressed_data_file_path=None compressed_index_file_path=None compressed_size_bytes=0
+2026-07-13 21:20:49.602 - dataset_manager - INFO - sampling strategy: sequential, unique conversations: 3, unique turn count: 3
+2026-07-13 21:20:49.602 - dataset_manager - INFO - Generating inputs.json file at /home/luke/Documents/Code/DFlash/artifacts/dflash_ngram/speed/isl36864_osl36864/inputs.json
+2026-07-13 21:20:49.603 - PhaseOrchestrator_016da954 - INFO - Initialized 2 phase(s): ['Warmup', 'Profiling']
+2026-07-13 21:20:49.603 - dataset_manager - INFO - inputs.json file generated in 0.00 seconds
+2026-07-13 21:20:49.914 - dataset_manager - INFO - Dataset client initialized and freed 3 conversations from memory
+2026-07-13 21:20:49.915 - dataset_manager - INFO - Dataset configured in 0.52 seconds
+2026-07-13 21:20:49.915 - system_controller - INFO - All services configured in 4.86 seconds
+2026-07-13 21:20:49.915 - system_controller - INFO - AIPerf System is CONFIGURED
+2026-07-13 21:20:49.916 - server_metrics_manager - INFO - Server Metrics: Started 1 collector(s) successfully
+2026-07-13 21:20:49.916 - system_controller - INFO - All services started profiling successfully
+2026-07-13 21:20:49.916 - system_controller - INFO - AIPerf System is PROFILING
+2026-07-13 21:20:49.917 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-07-13 21:20:49.917 - PhaseRunner - NOTICE - Phase warmup started | target: 1 requests
+2026-07-13 21:20:49.917 - records_manager - INFO - Credit phase start: warmup
+2026-07-13 21:20:49.917 - PhaseRunner - NOTICE - Phase warmup sending complete | sent=1, completed=0, in_flight=1 | sessions: sent=1, completed=0
+2026-07-13 21:22:12.119 - PhaseRunner - NOTICE - Phase warmup complete | completed=1, cancelled=0, errors=0 | sessions: completed=1, cancelled=0 | elapsed=82.20s
+2026-07-13 21:22:12.119 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-07-13 21:22:12.119 - PhaseRunner - NOTICE - Phase profiling started | target: 3 requests
+2026-07-13 21:22:12.120 - records_manager - INFO - Credit phase start: profiling
+2026-07-13 21:22:12.168 - EventLoopMonitor - WARNING - Event loop for worker_b87dd718 is taking too long to run. Overhead: 28.68ms
+2026-07-13 21:23:24.014 - EventLoopMonitor - WARNING - Event loop for worker_b87dd718 is taking too long to run. Overhead: 66.83ms
+2026-07-13 21:24:37.177 - PhaseRunner - NOTICE - Phase profiling sending complete | sent=3, completed=2, in_flight=1 | sessions: sent=3, completed=2
+2026-07-13 21:24:37.178 - records_manager - INFO - Sent 3 requests. Waiting for all to complete...
+2026-07-13 21:24:37.225 - EventLoopMonitor - WARNING - Event loop for worker_b87dd718 is taking too long to run. Overhead: 176.49ms
+2026-07-13 21:25:45.277 - PhaseRunner - NOTICE - Phase profiling complete | completed=3, cancelled=0, errors=0 | sessions: completed=3, cancelled=0 | elapsed=213.16s
+2026-07-13 21:25:45.277 - PhaseOrchestrator_016da954 - NOTICE - All credits completed
+2026-07-13 21:25:45.278 - records_manager - INFO - Received CREDIT_PHASE_COMPLETE message, Phase complete: PhaseRecordsStats(phase=CreditPhase.PROFILING, start_ns=1783970532119842105, sent_end_ns=1783970677177764909, requests_end_ns=1783970745277527920, total_expected_requests=3, expected_duration_sec=None, expected_num_sessions=None, expected_grace_period_sec=None, final_requests_sent=None, final_requests_completed=3, final_requests_cancelled=0, final_request_errors=0, final_sent_sessions=None, final_completed_sessions=None, final_cancelled_sessions=None, timeout_triggered=False, grace_period_timeout_triggered=False, was_cancelled=False, records_end_ns=None, success_records=2, error_records=0)
+2026-07-13 21:25:45.278 - records_manager - NOTICE - All requests have completed, please wait for the results to be processed (currently 2 of 3 records processed)...
+2026-07-13 21:25:45.278 - records_manager - INFO - All credits complete, please wait for the results to be processed...
+2026-07-13 21:25:45.279 - system_controller - INFO - Received credits complete from 'timing_manager'
+2026-07-13 21:25:45.326 - EventLoopMonitor - WARNING - Event loop for worker_b87dd718 is taking too long to run. Overhead: 68.00ms
+2026-07-13 21:25:45.532 - records_manager - INFO - Processed 3 valid requests and 0 errors (3 total).
+2026-07-13 21:25:45.532 - records_manager - INFO - Received all records, processing now...
+2026-07-13 21:25:45.533 - server_metrics_manager - INFO - Server Metrics: Profiling complete, capturing final metrics...
+2026-07-13 21:25:45.533 - records_manager - INFO - Waiting 1.7s for server metrics flush period...
+2026-07-13 21:25:47.277 - records_manager - INFO - Processing records results...
+2026-07-13 21:25:47.280 - system_controller - INFO - Waiting for server metrics results...
+2026-07-13 21:25:47.280 - system_controller - INFO - Waiting for server metrics results...
+2026-07-13 21:25:47.281 - records_manager - INFO - _finalize_and_process_results completed
+2026-07-13 21:25:47.281 - system_controller - INFO - All results received, initiating shutdown
+2026-07-13 21:25:48.044 - ExporterManager - INFO - Exporting all records
+2026-07-13 21:25:48.078 - ExporterManager - INFO - Exporting console data
