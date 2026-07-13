@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "aiperf_version": "0.11.0",
-  "benchmark_id": "8a0d9244ba18",
+  "benchmark_id": "f77a46ce9b4d",
   "summary": {
     "endpoints_configured": [
       "http://localhost:8001/metrics"
@@ -9,20 +9,20 @@
     "endpoints_successful": [
       "http://localhost:8001/metrics"
     ],
-    "start_time": "2026-07-06T19:10:25.091682",
-    "end_time": "2026-07-06T19:17:59.261967",
+    "start_time": "2026-07-09T21:18:57.879897",
+    "end_time": "2026-07-09T22:03:38.970269",
     "endpoint_info": {
       "http://localhost:8001/metrics": {
-        "total_fetches": 1365,
-        "first_fetch_ns": 1783357820854518789,
-        "last_fetch_ns": 1783358279301822217,
-        "avg_fetch_latency_ms": 14.241529406593406,
-        "unique_updates": 1364,
-        "first_update_ns": 1783357820854518789,
-        "last_update_ns": 1783358279301822217,
-        "duration_seconds": 458.447303428,
-        "avg_update_interval_ms": 336.3516532853999,
-        "median_update_interval_ms": 331.185457
+        "total_fetches": 8045,
+        "first_fetch_ns": 1783624733104304250,
+        "last_fetch_ns": 1783627418979587194,
+        "avg_fetch_latency_ms": 16.494346883530145,
+        "unique_updates": 8044,
+        "first_update_ns": 1783624733104304250,
+        "last_update_ns": 1783627418979587194,
+        "duration_seconds": 2685.875282944,
+        "avg_update_interval_ms": 333.9394856327241,
+        "median_update_interval_ms": 334.292999
       }
     }
   },
@@ -58,8 +58,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 17360.0,
-            "rate": 38.22013624040137
+            "total": 86856.0,
+            "rate": 32.39565573642767
           }
         }
       ]
@@ -71,8 +71,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 9927.0,
-            "rate": 21.85548919691615
+            "total": 10519.0,
+            "rate": 3.92338931900482
           }
         }
       ]
@@ -85,19 +85,19 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "avg": 246.69954805575935,
+            "avg": 233.24493360686313,
             "min": 0.0,
-            "max": 283.401,
-            "std": 18.662889094971888,
-            "p1": 226.503,
-            "p5": 231.899,
-            "p10": 235.29,
-            "p25": 240.79,
-            "p50": 248.321,
-            "p75": 251.934,
-            "p90": 254.557,
-            "p95": 278.35,
-            "p99": 278.35
+            "max": 294.222,
+            "std": 9.380131559402132,
+            "p1": 213.034,
+            "p5": 223.667,
+            "p10": 227.514,
+            "p25": 232.162,
+            "p50": 232.996,
+            "p75": 234.705,
+            "p90": 237.4968,
+            "p95": 238.295,
+            "p99": 276.745
           }
         }
       ]
@@ -110,8 +110,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 9.703,
-            "rate": 0.021362326148652903
+            "total": 53.923,
+            "rate": 0.020112265638244788
           }
         }
       ]
@@ -124,8 +124,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 7440.0,
-            "rate": 16.380058388743443
+            "total": 42152.0,
+            "rate": 15.72190384776986
           }
         }
       ]
@@ -138,19 +138,19 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "avg": 829.1489288334558,
-            "min": 279.621,
-            "max": 984.685,
-            "std": 95.1172161629708,
-            "p1": 520.98018,
-            "p5": 747.62,
-            "p10": 752.82,
-            "p25": 768.293,
-            "p50": 814.765,
-            "p75": 888.032,
-            "p90": 984.685,
-            "p95": 984.685,
-            "p99": 984.685
+            "avg": 777.7113207758299,
+            "min": 273.148,
+            "max": 903.306,
+            "std": 36.971946512403036,
+            "p1": 699.15818,
+            "p5": 716.83,
+            "p10": 736.866,
+            "p25": 762.804,
+            "p50": 782.466,
+            "p75": 792.515,
+            "p90": 802.762,
+            "p95": 812.289,
+            "p99": 903.306
           }
         }
       ]
@@ -186,11 +186,11 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "avg": 0.987527512839325,
+            "avg": 0.9900534626383191,
             "min": 0.0,
             "max": 1.0,
-            "std": 0.11102237381589132,
-            "p1": 0.0,
+            "std": 0.09924126298029508,
+            "p1": 1.0,
             "p5": 1.0,
             "p10": 1.0,
             "p25": 1.0,
@@ -210,8 +210,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 109575.0,
-            "rate": 241.24259381002184
+            "total": 599674.0,
+            "rate": 223.667132473134
           }
         }
       ]
@@ -224,8 +224,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 434.478,
-            "rate": 0.9565557807290959
+            "total": 2570.23,
+            "rate": 0.9586474882960128
           }
         }
       ]
@@ -235,7 +235,7 @@
     "models": {
       "items": [
         {
-          "name": "qwen36-dflash10"
+          "name": "qwen36-dflash15test"
         }
       ]
     },
@@ -255,7 +255,7 @@
       {
         "name": "main",
         "type": "synthetic",
-        "entries": 100,
+        "entries": 500,
         "random_seed": 42,
         "sampling": "sequential",
         "prompts": {
@@ -269,7 +269,7 @@
       {
         "name": "profiling",
         "type": "concurrency",
-        "requests": 100,
+        "requests": 500,
         "concurrency": 1
       }
     ],

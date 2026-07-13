@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["matplotlib"]
+# ///
 """Render the README charts from results_summary.csv.
 
-Reads the labeled tables out of results_summary.csv (the `# TABLE n:` blocks)
-and writes three PNGs to assets/:
+Reads the labeled tables out of benchmark/results_summary.csv (the `# TABLE n:`
+blocks) and writes five PNGs to assets/:
 
-  speed_vs_context.png    - gen tok/s vs context size, base vs DFlash
-  accuracy_vs_speed.png   - MATH-500 pass@1 + gen tok/s during that run
-  accuracy_by_subject.png - per-subject correct counts, base vs DFlash
+  speed_vs_context.png    - gen tok/s vs context size, base vs DFlash vs +ngram
+  accuracy_vs_speed.png   - MATH-500 (N=500) pass@1 + gen tok/s during that run
+  accuracy_by_subject.png - per-subject correct counts, base vs DFlash (N=500)
+  ngram_ablation.png      - bench_ngram iterative-coding decode t/s per stack
+  lcb_accuracy.png        - official LiveCodeBench pass@1, base vs DFlash
 
-Regenerate after editing the CSV:  uv run python benchmark/plot_results.py
+Regenerate after editing the CSV:  uv run benchmark/plot_results.py
 """
 
 from __future__ import annotations
@@ -26,13 +32,14 @@ from matplotlib.patches import PathPatch
 from matplotlib.path import Path as MplPath
 
 REPO = Path(__file__).resolve().parent.parent
-CSV_FILE = REPO / "results_summary.csv"
+CSV_FILE = Path(__file__).resolve().parent / "results_summary.csv"
 ASSETS = REPO / "assets"
 
-# Palette: DFlash is the story (blue), base is the neutral reference (gray).
-# Identity never rides on color alone: every chart carries a legend or named
-# axis ticks plus direct value labels.
+# Palette: DFlash is the story (blue), the ngram stack is the twist (green),
+# base is the neutral reference (gray). Identity never rides on color alone:
+# every chart carries a legend or named axis ticks plus direct value labels.
 BLUE = "#2a78d6"  # DFlash
+GREEN = "#1f9d63"  # DFlash + ngram stack
 GRAY = "#898781"  # base
 SURFACE = "#fcfcfb"
 INK = "#0b0b0b"
@@ -137,37 +144,47 @@ def plot_speed_vs_context(tables: dict) -> None:
     ctx = [int(r["context_tokens"]) for r in rows]
     base = [float(r["base_tps"]) for r in rows]
     dflash = [float(r["dflash_tps"]) for r in rows]
-    speedup = [float(r["speedup_dflash_vs_base"]) for r in rows]
+    ngram = [float(r["ngram_tps"]) if r.get("ngram_tps") else None for r in rows]
+    speedup = [float(r["speedup_ngram_vs_base"]) if r.get("speedup_ngram_vs_base")
+               else None for r in rows]
     xs = range(len(ctx))
 
     fig, ax = plt.subplots(figsize=(8.5, 4.6), dpi=DPI)
     fig.patch.set_facecolor(SURFACE)
     style_axes(ax)
 
-    for ys, color, label in ((base, GRAY, "base"), (dflash, BLUE, "DFlash")):
-        ax.plot(xs, ys, color=color, linewidth=2, solid_capstyle="round",
-                solid_joinstyle="round", label=label, zorder=3)
-        ax.plot(xs, ys, "o", color=color, markersize=8,
-                markeredgecolor=SURFACE, markeredgewidth=2, zorder=4)
+    series = (
+        (base, GRAY, "base"),
+        (dflash, BLUE, "DFlash"),
+        (ngram, GREEN, "DFlash + ngram"),
+    )
+    for ys, color, label in series:
+        pts = [(x, y) for x, y in zip(xs, ys) if y is not None]
+        ax.plot([p[0] for p in pts], [p[1] for p in pts], color=color,
+                linewidth=2, solid_capstyle="round", solid_joinstyle="round",
+                label=label, zorder=3)
+        ax.plot([p[0] for p in pts], [p[1] for p in pts], "o", color=color,
+                markersize=8, markeredgecolor=SURFACE, markeredgewidth=2, zorder=4)
 
-    for x, y, s in zip(xs, dflash, speedup):
-        ax.annotate(f"{s:.1f}×", (x, y), xytext=(0, 12),
-                    textcoords="offset points", ha="center",
-                    fontsize=10, color=INK_2, fontweight="bold")
-    ax.annotate(f"{dflash[-1]:.0f}", (len(ctx) - 1, dflash[-1]), xytext=(14, -3),
-                textcoords="offset points", fontsize=10, color=INK)
-    ax.annotate(f"{base[-1]:.0f}", (len(ctx) - 1, base[-1]), xytext=(14, -3),
-                textcoords="offset points", fontsize=10, color=INK)
+    for x, y, s in zip(xs, ngram, speedup):
+        if y is not None and s is not None:
+            ax.annotate(f"{s:.1f}×", (x, y), xytext=(0, 12),
+                        textcoords="offset points", ha="center",
+                        fontsize=10, color=INK_2, fontweight="bold")
+    for ys in (base, dflash, ngram):
+        if ys[-1] is not None:
+            ax.annotate(f"{ys[-1]:.0f}", (len(ctx) - 1, ys[-1]), xytext=(14, -3),
+                        textcoords="offset points", fontsize=10, color=INK)
 
     ax.set_xticks(list(xs))
     ax.set_xticklabels([fmt_ctx(c) for c in ctx])
     ax.set_xlim(-0.35, len(ctx) - 0.45)
-    ax.set_ylim(0, 320)
+    ax.set_ylim(0, 380)
     ax.set_xlabel("context size (input = output tokens)", color=MUTED, fontsize=9)
-    ax.set_ylabel("generation tok/s", color=MUTED, fontsize=9)
-    ax.set_title("DFlash pulls away as context grows",
+    ax.set_ylabel("generation tok/s (E2E per user)", color=MUTED, fontsize=9)
+    ax.set_title("Speculative decoding vs context size",
                  color=INK, fontsize=13, fontweight="bold", loc="left", pad=16)
-    ax.text(0, 1.02, "aiperf synthetic sweep, greedy, concurrency 1 — Qwen3.6-27B, RTX PRO 6000",
+    ax.text(0, 1.02, "aiperf synthetic sweep, greedy, concurrency 1 — Qwen3.6-27B, RTX PRO 6000 · ×= ngram speedup vs base",
             transform=ax.transAxes, fontsize=9, color=INK_2)
     ax.legend(loc="upper left", frameon=False, fontsize=10, labelcolor=INK_2)
 
@@ -177,20 +194,22 @@ def plot_speed_vs_context(tables: dict) -> None:
 
 
 def plot_accuracy_vs_speed(tables: dict) -> None:
-    acc = {r["run"]: r for r in tables["2"]}
+    # full-set rows only (the CSV also carries the older N=100 pair)
+    acc = {r["run"]: r for r in tables["2"] if r["n_problems"] == "500"}
     base, dflash = acc["base"], acc["dflash"]
     n = int(base["n_problems"])
+    ratio = float(dflash["gen_tps"]) / float(base["gen_tps"])
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8.5, 4.2), dpi=DPI)
     fig.patch.set_facecolor(SURFACE)
-    fig.suptitle("Same answers — 3.75× faster", x=0.06, ha="left",
+    fig.suptitle(f"Same answers — {ratio:.1f}× faster", x=0.06, ha="left",
                  color=INK, fontsize=14, fontweight="bold")
     fig.text(0.06, 0.895,
-             f"MATH-500, first {n} problems, greedy (temperature 0), reasoning off",
+             f"MATH-500, all {n} problems, greedy (temperature 0), reasoning off",
              fontsize=9, color=INK_2)
 
     panels = (
-        (ax1, f"pass@1 (N={n})", "accuracy_pct", 100, "{:.0f}%"),
+        (ax1, f"pass@1 (N={n})", "accuracy_pct", 100, "{:.1f}%"),
         (ax2, "gen tok/s during the run", "gen_tps", 300, "{:.0f}"),
     )
     for ax, title, key, ymax, fmt in panels:
@@ -227,7 +246,7 @@ def plot_accuracy_by_subject(tables: dict) -> None:
     thickness, gap = 0.30, 0.06
     ys = range(len(subjects))
     ax.set_ylim(len(subjects) - 0.4, -0.6)
-    ax.set_xlim(0, 27.5)
+    ax.set_xlim(0, max(totals) * 1.12)
     fig.canvas.draw()
     for y, (b, d) in enumerate(zip(base, dflash)):
         rounded_bar_h(ax, y - (thickness + gap) / 2, b, thickness, GRAY)
@@ -241,9 +260,9 @@ def plot_accuracy_by_subject(tables: dict) -> None:
     ax.set_yticklabels([f"{s}  ({t})" for s, t in zip(subjects, totals)],
                        fontsize=9, color=INK_2)
     ax.set_xlabel("problems correct", color=MUTED, fontsize=9)
-    ax.set_title("Identical in 6 of 7 subjects",
+    ax.set_title("Within 2 problems in every subject",
                  color=INK, fontsize=13, fontweight="bold", loc="left", pad=16)
-    ax.text(0, 1.02, "MATH-500 N=100 — subject totals in parentheses",
+    ax.text(0, 1.02, "MATH-500 full set (N=500) — subject totals in parentheses",
             transform=ax.transAxes, fontsize=9, color=INK_2)
     ax.legend(handles=[
         plt.Line2D([], [], marker="s", linestyle="", markersize=9, color=GRAY, label="base"),
@@ -255,17 +274,95 @@ def plot_accuracy_by_subject(tables: dict) -> None:
     plt.close(fig)
 
 
+def plot_ngram_ablation(tables: dict) -> None:
+    rows = tables["6"]
+    names = [r["run"] for r in rows]
+    overall = [float(r["decode_tps"]) for r in rows]
+    maint = [float(r["maint_tps"]) for r in rows]
+    speedup = [float(r["speedup_vs_base"]) for r in rows]
+
+    fig, ax = plt.subplots(figsize=(8.5, 4.6), dpi=DPI)
+    fig.patch.set_facecolor(SURFACE)
+    style_axes(ax, y_grid=False, x_grid=True)
+
+    thickness, gap = 0.30, 0.06
+    ax.set_ylim(len(names) - 0.4, -0.6)
+    ax.set_xlim(0, max(maint) * 1.22)
+    fig.canvas.draw()
+    for y, (o, m, s) in enumerate(zip(overall, maint, speedup)):
+        rounded_bar_h(ax, y - (thickness + gap) / 2, o, thickness, BLUE)
+        rounded_bar_h(ax, y + (thickness + gap) / 2, m, thickness, GREEN)
+        ax.annotate(f"{o:.0f} · {s:.1f}×", (o, y - (thickness + gap) / 2),
+                    xytext=(5, 0), textcoords="offset points", va="center",
+                    fontsize=9, color=INK, fontweight="bold")
+        ax.annotate(f"{m:.0f}", (m, y + (thickness + gap) / 2), xytext=(5, 0),
+                    textcoords="offset points", va="center", fontsize=9, color=INK)
+
+    ax.set_yticks(list(range(len(names))))
+    ax.set_yticklabels(names, fontsize=9, color=INK_2)
+    ax.set_xlabel("decode tok/s (× = speedup vs baseline)", color=MUTED, fontsize=9)
+    ax.set_title("n-gram lookup doubles DFlash on iterative coding",
+                 color=INK, fontsize=13, fontweight="bold", loc="left", pad=16)
+    ax.text(0, 1.02,
+            "bench_ngram — 18-turn cumulative coding session; maint = turns 10-18, editing the existing code",
+            transform=ax.transAxes, fontsize=9, color=INK_2)
+    ax.legend(handles=[
+        plt.Line2D([], [], marker="s", linestyle="", markersize=9, color=BLUE, label="whole session"),
+        plt.Line2D([], [], marker="s", linestyle="", markersize=9, color=GREEN, label="maint phase"),
+    ], loc="upper right", frameon=False, fontsize=10, labelcolor=INK_2)
+
+    fig.tight_layout()
+    fig.savefig(ASSETS / "ngram_ablation.png", facecolor=SURFACE)
+    plt.close(fig)
+
+
+def plot_lcb_accuracy(tables: dict) -> None:
+    acc = {r["run"]: r for r in tables["4"]}
+    base, dflash = acc["base"], acc["dflash"]
+    n = int(base["n_problems"])
+
+    fig, ax = plt.subplots(figsize=(6.2, 4.2), dpi=DPI)
+    fig.patch.set_facecolor(SURFACE)
+    style_axes(ax)
+    ax.set_xlim(-0.7, 1.7)
+    ax.set_ylim(0, 30)
+    fig.canvas.draw()
+    for x, (row, color) in enumerate(((base, GRAY), (dflash, BLUE))):
+        val = float(row["pass_at_1_pct"])
+        rounded_bar(ax, x, val, 0.22, color)
+        ax.annotate(f"{val:.1f}%", (x, val), xytext=(0, 20),
+                    textcoords="offset points", ha="center",
+                    fontsize=12, color=INK, fontweight="bold")
+        ax.annotate(f"{row['correct']}/{n} correct", (x, val), xytext=(0, 6),
+                    textcoords="offset points", ha="center",
+                    fontsize=9, color=INK_2)
+    ax.set_xticks([0, 1])
+    ax.set_xticklabels(["base", "DFlash"], fontsize=10)
+    ax.set_title("LiveCodeBench: parity (within noise)",
+                 color=INK, fontsize=13, fontweight="bold", loc="left", pad=16)
+    ax.text(0, 1.02, f"official LCB harness · release_v5 · Aug-2024 ({n} problems) · n=1, temp 0",
+            transform=ax.transAxes, fontsize=8.5, color=INK_2)
+    ax.set_ylabel("pass@1 (%)", color=MUTED, fontsize=9)
+
+    fig.tight_layout()
+    fig.savefig(ASSETS / "lcb_accuracy.png", facecolor=SURFACE)
+    plt.close(fig)
+
+
 def main() -> None:
     plt.rcParams["font.family"] = "DejaVu Sans"
     tables = load_tables(CSV_FILE)
-    for tid in ("1", "2", "2B"):
+    for tid in ("1", "2", "2B", "4", "6"):
         if tid not in tables or not tables[tid]:
             raise SystemExit(f"results_summary.csv: TABLE {tid} missing or empty")
     ASSETS.mkdir(exist_ok=True)
     plot_speed_vs_context(tables)
     plot_accuracy_vs_speed(tables)
     plot_accuracy_by_subject(tables)
-    for name in ("speed_vs_context", "accuracy_vs_speed", "accuracy_by_subject"):
+    plot_ngram_ablation(tables)
+    plot_lcb_accuracy(tables)
+    for name in ("speed_vs_context", "accuracy_vs_speed", "accuracy_by_subject",
+                 "ngram_ablation", "lcb_accuracy"):
         print(f"wrote assets/{name}.png")
 
 

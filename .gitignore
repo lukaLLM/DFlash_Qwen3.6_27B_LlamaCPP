@@ -1,1 +1,10 @@
 *.env
+benchmark/bench_results/
+LiveCodeBench/
+.gitignore
+ngram.md
+Notes.md
+benchmark/bench_ngram.md
+benchmark/bench_ngram.md
+docker/docker-compose deepseekflash.yaml
+docker/llamacpp-lid-cuda.Dockerfile

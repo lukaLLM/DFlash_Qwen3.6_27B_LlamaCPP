@@ -4,10 +4,11 @@
 set -euo pipefail
 
 case "${1:-dflash}" in
-  dflash) svc=llamacpp_dflash;      tag=dflash; port=8001 ;;
-  mtp)    svc=llama_cpp_qwen36_mtp; tag=mtp;    port=8001 ;;
-  base)   svc=llamacpp_baseline;    tag=base;   port=8000 ;;
-  *) echo "usage: $0 [dflash|mtp|base]"; exit 1 ;;
+  dflash) svc=llamacpp_dflash;       tag=dflash;       port=8001 ;;
+  ngram)  svc=llamacpp_dflash_ngram; tag=dflash_ngram; port=8001 ;;
+  mtp)    svc=llama_cpp_qwen36_mtp;  tag=mtp;          port=8001 ;;
+  base)   svc=llamacpp_baseline;     tag=base;         port=8000 ;;
+  *) echo "usage: $0 [dflash|ngram|mtp|base]"; exit 1 ;;
 esac
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 art="$here/../artifacts/$tag/speed"

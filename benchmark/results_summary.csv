@@ -1,38 +1,60 @@
-﻿# TABLE 1: SPEED SWEEP - DFlash vs base, generation tok/s by context size (aiperf synthetic sweep, ISL=OSL, greedy, concurrency 1, 10 requests/size)
-context_tokens,base_tps,dflash_tps,dflash_reasoning_tps,speedup_dflash_vs_base,base_itl_ms,dflash_itl_ms,base_ttft_ms,dflash_ttft_ms,base_server_tps,dflash_server_tps
-512,67.62,97.13,96.61,1.44,14.20,9.62,310,354,70.56,106.10
-4096,67.53,182.04,166.64,2.70,14.46,5.08,1440,1674,69.80,141.57
-12288,64.78,220.12,240.41,3.40,15.11,4.17,3994,4535,68.42,194.78
-36864,61.47,273.04,,4.44,15.91,3.26,12879,14541,60.09,232.39
-98304,,,241.44,,,,,,,
+# TABLE 1: SPEED SWEEP - generation tok/s by context size (aiperf synthetic sweep, ISL=OSL, greedy, concurrency 1, 10 requests/size). tps = E2E output token throughput per user (includes TTFT). base cells = original recording (raw base artifacts removed); dflash + ngram cells re-extracted from artifacts/ 2026-07. NOTE: the dflash 36864 point was re-run 2026-07 and measures much slower than the original recording (E2E 273.04, ITL 3.26 - worth re-running to confirm). ngram accept on synthetic prompts is only 9-14% (random tokens = nothing to copy).
+context_tokens,base_tps,dflash_tps,ngram_tps,dflash_reasoning_tps,speedup_dflash_vs_base,speedup_ngram_vs_base,base_itl_ms,dflash_itl_ms,ngram_itl_ms,base_ttft_ms,dflash_ttft_ms,ngram_ttft_ms,base_server_tps,dflash_server_tps
+512,67.62,98.66,94.88,96.61,1.46,1.40,14.20,9.62,10.19,310,354,357,70.56,106.10
+4096,67.53,189.90,244.75,166.64,2.81,3.62,14.46,5.08,3.91,1440,1674,1683,69.80,141.57
+12288,64.78,237.40,329.40,240.41,3.66,5.08,15.11,4.17,2.66,3994,4535,4778,68.42,194.78
+36864,61.47,115.78,127.80,,1.88,2.08,15.91,4.98,4.14,12879,15167,15504,60.09,232.39
+98304,,,,241.44,,,,,,,,,,
 
-# TABLE 2: ACCURACY - MATH-500 pass@1 (temperature 0, reasoning off, LLAMA_CTX=32768, same first 100 problems: sequential + seed 42, one server on the GPU at a time),,,,,,
+# TABLE 2: ACCURACY - MATH-500 pass@1 (temperature 0, reasoning off, sequential + seed 42, one server on the GPU at a time). gen_tps = per-user decode throughput during the run.
 run,server_alias,benchmark,n_problems,correct,unparsed,accuracy_pct,gen_tps,duration_s,avg_output_tokens,valid,notes
 base,qwen3.6-27B,math_500,100,87,0,87.00,72.06,1473.7,1046,yes,"clean paired run, 0 request errors"
 dflash,qwen36-dflash10,math_500,100,86,0,86.00,270.47,454.2,1095,yes,"clean paired run, n_max=10; same 100 problems as base, 3.75x gen speed"
+base,qwen3.6-27B,math_500,500,440,0,88.00,73.07,8216.5,1185,yes,"full MATH-500 set (2.3 h wall)"
+dflash,qwen36-dflash15test,math_500,500,435,0,87.00,254.67,2681.1,1198,yes,"full set, n_max=15; same 500 problems, 3.49x gen speed / 3.06x wall"
 
-# TABLE 2B: ACCURACY BY SUBJECT - MATH-500 N=100 (correct per subject; base and dflash identical in 6 of 7 subjects),,,,,,,,,,,
-subject,total,base_correct,dflash_correct,,,,,,,,
-Algebra,25,22,22,,,,,,,,
-Counting & Probability,6,4,4,,,,,,,,
-Geometry,7,5,5,,,,,,,,
-Intermediate Algebra,19,16,16,,,,,,,,
-Number Theory,11,10,10,,,,,,,,
-Prealgebra,18,16,15,,,,,,,,
-Precalculus,14,14,14,,,,,,,,
+# TABLE 2B: ACCURACY BY SUBJECT - MATH-500 N=500 full set (correct per subject; base ahead in 4 subjects, dflash in 2, tie in 1; max gap 2 problems)
+subject,total,base_correct,dflash_correct
+Algebra,124,109,108
+Counting & Probability,38,32,30
+Geometry,41,37,35
+Intermediate Algebra,97,82,83
+Number Theory,62,57,58
+Prealgebra,82,71,69
+Precalculus,56,52,52
 
-# TABLE 3: LEADERBOARD RUNS, 10 requests; n_max = --spec-draft-n-max; baseline = qwen3.6-27B @ 70.34 tok/s),,,,,,,,,,
-run_name,type,n_max,reasoning,avg_tps,median_tps,min_tps,max_tps,accept_pct,speedup_vs_baseline,,
-qwen3.6-27B,baseline,,no,70.34,70.38,69.92,70.73,,1.00,,
-qwen36-dflash2,dflash,2,no,141.01,141.12,137.13,143.24,91.1,2.00,,
-qwen36-dflash4,dflash,4,no,178.34,179.65,168.24,180.75,80.4,2.54,,
-qwen36-dflash8,dflash,8,no,236.15,239.06,215.50,239.91,63.1,3.36,,
-qwen36-dflash12,dflash,12,no,256.01,258.54,234.93,260.65,50.5,3.64,,
-qwen36-dflash15,dflash,15,no,253.21,256.35,230.64,257.46,42.8,3.60,,
-qwen36-dflash15reason,dflash,15,yes,224.18,225.30,215.09,226.62,36.4,3.19,,
-qwen3.6-27b-mtp2,mtp,2,no,142.68,142.48,141.49,144.98,88.5,2.03,,
-qwen3.6-27b-mtp4,mtp,4,no,167.47,167.70,163.46,169.46,79.8,2.38,,
-qwen3.6-27b-mtp8,mtp,8,no,190.17,191.48,184.12,192.17,57.9,2.70,,
-qwen3.6-27b-mtp12,mtp,12,no,179.03,180.29,171.00,180.59,43.3,2.55,,
-qwen3.6-27b-mtp15,mtp,15,no,167.00,168.25,158.03,168.89,36.0,2.37,,
+# TABLE 3: LEADERBOARD RUNS (10 short requests; n_max = --spec-draft-n-max; baseline = qwen3.6-27B @ 70.34 tok/s). ngram row: short code-ish prompt is the ngram best case (81% accept).
+run_name,type,n_max,reasoning,avg_tps,median_tps,min_tps,max_tps,accept_pct,speedup_vs_baseline
+qwen3.6-27B,baseline,,no,70.34,70.38,69.92,70.73,,1.00
+qwen36-dflash2,dflash,2,no,141.01,141.12,137.13,143.24,91.1,2.00
+qwen36-dflash4,dflash,4,no,178.34,179.65,168.24,180.75,80.4,2.54
+qwen36-dflash8,dflash,8,no,236.15,239.06,215.50,239.91,63.1,3.36
+qwen36-dflash12,dflash,12,no,256.01,258.54,234.93,260.65,50.5,3.64
+qwen36-dflash15,dflash,15,no,253.21,256.35,230.64,257.46,42.8,3.60
+qwen36-dflash15reason,dflash,15,yes,224.18,225.30,215.09,226.62,36.4,3.19
+qwen3.6-27b-mtp2,mtp,2,no,142.68,142.48,141.49,144.98,88.5,2.03
+qwen3.6-27b-mtp4,mtp,4,no,167.47,167.70,163.46,169.46,79.8,2.38
+qwen3.6-27b-mtp8,mtp,8,no,190.17,191.48,184.12,192.17,57.9,2.70
+qwen3.6-27b-mtp12,mtp,12,no,179.03,180.29,171.00,180.59,43.3,2.55
+qwen3.6-27b-mtp15,mtp,15,no,167.00,168.25,158.03,168.89,36.0,2.37
 qwen3.6-27b-mtp15reason,mtp,15,yes,163.12,163.60,160.35,163.75,34.4,2.32
+qwen36-dflash-ngram,dflash+ngram,15,no,660.72,737.77,205.58,745.13,81.2,9.39
+
+# TABLE 4: CODING ACCURACY - official LiveCodeBench pass@1 (release_v5, 2024-08-01..2024-08-31 window, n=1, temperature 0, code executed locally by the harness). Small sample - the 1-problem gap is noise, the takeaway is parity. CAVEAT: both runs used lcb_runner's default --max_tokens 2000, which truncated 47/58 (base) and 46/58 (dflash) generations mid-reasoning before any code block -> auto-fail; every generation that fit passed (11/11 and 12/12). The A/B parity is fair (identical truncation) but absolute pass@1 is understated - re-run with --max_tokens 16000 for real capability numbers.
+run,model_alias,n_problems,window,release,pass_at_1_pct,correct
+base,qwen3.6-27B,58,2024-08-01..2024-08-31,release_v5,18.97,11
+dflash,qwen36-dflash15test,58,2024-08-01..2024-08-31,release_v5,20.69,12
+
+# TABLE 5: LCB REAL-PROMPT SPEED - same LiveCodeBench prompts replayed through aiperf (greedy, concurrency 1, seed 42). Single-turn real prompts: ngram adds nothing over dflash here (no repeated context to copy). The 30-request replay artifacts were deleted; its row comes from the results.md log paste.
+run,source,dataset,n_requests,gen_tps_per_user,total_tps,ttft_ms,itl_ms,avg_osl,accept_pct
+dflash,lcb_speed.sh,lcb_release_v5_first100,100,176.07,140.43,1080.2,6.05,2602.0,47
+dflash_ngram,lcb_speed.sh,lcb_release_v5_first100,100,170.33,137.58,1029.3,6.21,2511.9,42
+dflash_ngram,aiperf replay (log in results.md),lcb_aug2024.jsonl,30,195.18,148.98,293.4,6.07,516.3,
+
+# TABLE 6: NGRAM CODING BENCH - bench_ngram.py 18-turn cumulative coding session (build 1-9, maint 10-18 = working on the existing code), server/model default sampling, 2026-07-12. decode/maint/e2e in tok/s; the baseline SLOWS as context grows (early->late) while ngram stacks ACCELERATE (more context = more to copy).
+run,model_alias,decode_tps,speedup_vs_base,maint_tps,e2e_tps,accept_pct,spec_share_pct,draft_overhead,early_tps,late_tps,avg_ttft_s,total_tokens
+baseline,qwen3.6-27B,53.52,1.00,51.25,52.00,,,,62.84,48.92,4.85,160190
+dflash,qwen36-dflash15,198.74,3.71,203.65,177.80,39.4,85.5,2.17,169.95,182.96,4.20,127512
+dflash+map-k4v,qwen36-dflash-map-k4v,200.61,3.75,206.83,180.24,39.5,85.8,2.17,167.27,169.11,3.98,127308
+dflash+ngram-mod,qwen36-dflash-ngram-mod,304.25,5.68,375.55,260.34,51.3,92.4,1.80,164.58,317.18,3.76,122124
+dflash+ngram-mod+map-k4v,qwen3.6-dflash15-ngram-mod-map-k4v,321.45,6.01,384.99,275.61,50.3,92.1,1.83,166.36,325.09,3.58,124557

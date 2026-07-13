@@ -2,11 +2,9 @@
 name = "dflash-benchmark"
 version = "0.1.0"
 description = "Side-by-side speed comparison: Qwen 3.6 baseline vs Qwen 3.6 + DFlash speculative decoding."
-readme = "DFLASH.md"
+readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-  "matplotlib>=3.11.0",
-  "pyfiglet>=1.0.4",
-  "requests>=2.34.2",
-  "rich>=15.0.0",
+    "hf-transfer>=0.1.9",
+    "huggingface-hub>=1.23.0",
 ]
