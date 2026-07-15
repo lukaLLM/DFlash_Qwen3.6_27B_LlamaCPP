@@ -112,31 +112,51 @@ the same definition for every column. Artifacts in
 
 | Context (ISL=OSL) | base tok/s | DFlash tok/s | +ngram tok/s | DFlash speedup | ngram speedup | base ITL (ms) | DFlash ITL (ms) | ngram ITL (ms) |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 512 | 67.62 | 96.98 | 91.85 | **1.43×** | 1.36× | 14.20 | 9.62 | 10.19 |
-| 4 096 | 67.53 | 182.19 | **231.44** | 2.70× | **3.43×** | 14.46 | 5.08 | 3.91 |
-| 12 288 | 64.78 | 220.31 | **327.99** | 3.40× | **5.06×** | 15.11 | 4.17 | 2.66 |
-| 36 864 | 61.47 | 246.21 | **520.87** | 4.01× | **8.47×** | 15.91 | 3.68 | 1.51 |
+| 512 | 67.62 | 96.88 | 91.85 | **1.43×** | 1.36× | 14.20 | 9.65 | 10.19 |
+| 4 096 | 67.53 | 191.52 | **231.44** | 2.84× | **3.43×** | 14.46 | 4.83 | 3.91 |
+| 12 288 | 64.78 | 233.98 | **327.99** | 3.61× | **5.06×** | 15.11 | 3.92 | 2.66 |
+| 36 864 | 61.47 | 289.34 | **520.87** | 4.71× | **8.47×** | 15.91 | 3.06 | 1.51 |
 
 DFlash with reasoning on measured 96.61 / 166.64 / 240.41 tok/s at
 512 / 4 096 / 12 288, and 241.44 at 98 304.
 
-Caveats on this table (both 36 864 points re-measured 2026-07-13):
+Caveats on this table (DFlash column fully re-swept 2026-07-15 at ctx 256k):
 
-- **DFlash 36 864**: the fresh run confirms the fast path - ITL 3.68 ms,
-  272 tok/s per-user decode, matching the originally recorded 273.04
-  (ITL 3.26) and disproving an anomalous earlier artifact (4.98 ms). The
-  server EOS'd at ~8.2k output tokens on this run.
+- **DFlash 36 864 is now measured symmetric with the ngram point.** The
+  re-sweep uses the compose default `-c 256000`; earlier DFlash runs used
+  `LLAMA_CTX=40960`, so their 36 864 run stopped at ~8.2k output tokens when
+  the window filled (those runs measured ITL 3.68 ms / ~272 tok/s). With the
+  full 36 864-token output generated, ITL drops to 3.06 ms and the point
+  rises to 289 tok/s (4.71×). The 512 point is unchanged (96.98 → 96.88), so
+  the bigger KV allocation itself costs nothing; 4 096 / 12 288 improved ~5%
+  (faster prefill and slightly lower ITL on the current image build).
 - **ngram 36 864 (8.47×) is a best-case ceiling, not typical.** The full
-  stack was confirmed via `docker inspect`, but three asymmetries inflate it:
-  the ngram service runs ctx 256k vs DFlash's 40960; the ngram run generated
-  the full 36 864 tokens while the DFlash run stopped at 8.2k; and greedy
-  36k-token synthetic output degenerates into repetition - exactly what the
-  n-gram drafters copy (on a short probe they added zero drafts over plain
-  DFlash). The realistic multi-turn number is the
+  stack was confirmed via `docker inspect`, and the 36 864 pair is now
+  symmetric - same ctx 256k, both generating the full 36 864 tokens - which
+  puts the ngram stack's edge over plain DFlash at **1.80×** (520.87 vs
+  289.34). The remaining inflation is degeneration: greedy 36k-token
+  synthetic output collapses into repetition - exactly what the n-gram
+  drafters copy - and it lifts plain DFlash's acceptance too (its ITL fell
+  3.68 → 3.06 once the output ran full length, despite attending over a KV
+  twice as deep). Treat 8.47× and 4.71× as long-degenerate-output ceilings;
+  the realistic multi-turn number is the
   [iterative-coding ablation](#iterative-coding---the-n-gram-ablation-bench_ngram) (~6×).
-- **Synthetic prompts are otherwise the n-gram worst case**: random tokens
-  give the lookup drafters almost nothing to copy (draft accept 9-14% on the
-  shorter sizes), yet +ngram still leads at 4K/12K.
+- **The degeneration was verified directly (2026-07-15)** by replaying the
+  exact 36 864 benchmark request on the ngram server. The repetition does
+  NOT come from the input: aiperf's synthetic prompts are disjoint
+  Shakespeare-corpus chunks with ~0% duplicate 12-grams, zero duplicate
+  24-grams, and zero cross-prompt overlap, and 0.0% of the output's 12-grams
+  appear in the input. What happens is self-repetition: forced past its
+  natural stop by `ignore_eos`, the model opens with a genuine
+  *Love's Labour's Lost* continuation, then locks into a two-line loop
+  ("ARMADO: I will be faithful. / MOTH: And so will I, sir.") repeated
+  ~1,514×; 98.3% of output 12-grams are duplicates. The replay measured
+  **92% draft acceptance (35 898/38 908) and 748 tok/s** server-side decode -
+  vs 9-14% acceptance and 75-105 tok/s on the natural-story probe
+  (`artifacts/dflash_ngram/speed/acceptance.txt`).
+- **Synthetic prompts are otherwise the n-gram worst case**: the disjoint
+  prose chunks give the lookup drafters almost nothing to copy (draft accept
+  9-14% on the shorter sizes), yet +ngram still leads at 4K/12K.
 
 ### Leaderboard runs (`benchmark/leaderboard_runs.csv`)
 
@@ -621,7 +641,7 @@ an ever-longer KV cache, so per-token cost grows with context. The baseline
 pays that cost once per token (67.6 → 61.5 tok/s as context grows). DFlash
 verifies a batch of ~10 drafted tokens in one target pass, amortizing that
 expensive long-context attention across multiple tokens - which is exactly why
-its curve climbs (97 → 273 tok/s) and the speedup grows from 1.44× to 4.44×.
+its curve climbs (97 → 289 tok/s) and the speedup grows from 1.43× to 4.71×.
 
 ### Real-prompt speed A/B - LiveCodeBench through aiperf
 

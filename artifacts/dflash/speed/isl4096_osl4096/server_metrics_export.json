@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "aiperf_version": "0.11.0",
-  "benchmark_id": "22eb90677acc",
+  "benchmark_id": "ce09e3ed81e9",
   "summary": {
     "endpoints_configured": [
       "http://localhost:8001/metrics"
@@ -9,20 +9,20 @@
     "endpoints_successful": [
       "http://localhost:8001/metrics"
     ],
-    "start_time": "2026-07-05T21:23:57.566822",
-    "end_time": "2026-07-05T21:27:42.540479",
+    "start_time": "2026-07-15T10:54:27.384615",
+    "end_time": "2026-07-15T10:58:01.374059",
     "endpoint_info": {
       "http://localhost:8001/metrics": {
-        "total_fetches": 809,
-        "first_fetch_ns": 1783279389850560843,
-        "last_fetch_ns": 1783279662572829906,
-        "avg_fetch_latency_ms": 34.100247184177995,
-        "unique_updates": 787,
-        "first_update_ns": 1783279389850560843,
-        "last_update_ns": 1783279662572829906,
-        "duration_seconds": 272.722269063,
-        "avg_update_interval_ms": 346.97489702671754,
-        "median_update_interval_ms": 336.6881345
+        "total_fetches": 770,
+        "first_fetch_ns": 1784105621816755629,
+        "last_fetch_ns": 1784105881402754764,
+        "avg_fetch_latency_ms": 30.704992323376622,
+        "unique_updates": 751,
+        "first_update_ns": 1784105621816755629,
+        "last_update_ns": 1784105881386424008,
+        "duration_seconds": 259.569668379,
+        "avg_update_interval_ms": 346.092891172,
+        "median_update_interval_ms": 331.708457
       }
     }
   },
@@ -58,8 +58,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 7192.0,
-            "rate": 31.938154940431243
+            "total": 7187.0,
+            "rate": 33.58237676687449
           }
         }
       ]
@@ -85,19 +85,19 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "avg": 141.57401331360947,
-            "min": 125.479,
-            "max": 162.273,
-            "std": 10.49464040700848,
-            "p1": 125.479,
-            "p5": 125.479,
-            "p10": 125.479,
-            "p25": 134.264,
-            "p50": 139.331,
-            "p75": 151.096,
-            "p90": 160.637,
-            "p95": 160.637,
-            "p99": 160.637
+            "avg": 145.2817274143302,
+            "min": 126.255,
+            "max": 166.935,
+            "std": 11.936006082705903,
+            "p1": 126.255,
+            "p5": 126.255,
+            "p10": 126.255,
+            "p25": 136.725,
+            "p50": 143.173,
+            "p75": 156.171,
+            "p90": 165.6,
+            "p95": 165.6,
+            "p99": 165.6
           }
         }
       ]
@@ -110,8 +110,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 14.019999999999998,
-            "rate": 0.06225986266196412
+            "total": 13.516,
+            "rate": 0.0631556149131871
           }
         }
       ]
@@ -125,7 +125,7 @@
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
             "total": 41081.0,
-            "rate": 182.43205549330588
+            "rate": 191.95737024627394
           }
         }
       ]
@@ -138,19 +138,19 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "avg": 2480.936582840237,
-            "min": 2235.49,
-            "max": 2621.9,
-            "std": 104.6655200956758,
-            "p1": 2305.72,
-            "p5": 2305.72,
-            "p10": 2305.72,
-            "p25": 2414.02,
-            "p50": 2499.86,
-            "p75": 2562.12,
-            "p90": 2612.2,
-            "p95": 2621.9,
-            "p99": 2621.9
+            "avg": 2560.403847352025,
+            "min": 2278.06,
+            "max": 2698.23,
+            "std": 112.09226030635752,
+            "p1": 2363.56,
+            "p5": 2363.56,
+            "p10": 2363.56,
+            "p25": 2488.2,
+            "p50": 2584.41,
+            "p75": 2671.33,
+            "p90": 2697.346,
+            "p95": 2698.23,
+            "p99": 2698.23
           }
         }
       ]
@@ -186,10 +186,10 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "avg": 0.9940828402366864,
+            "avg": 0.9953271028037384,
             "min": 0.0,
             "max": 1.0,
-            "std": 0.0767519463953629,
+            "std": 0.06825186571668533,
             "p1": 1.0,
             "p5": 1.0,
             "p10": 1.0,
@@ -210,8 +210,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 45056.0,
-            "rate": 200.08419201836347
+            "total": 40960.0,
+            "rate": 191.39197890234857
           }
         }
       ]
@@ -224,8 +224,8 @@
         {
           "endpoint_url": "http://localhost:8001/metrics",
           "stats": {
-            "total": 229.562,
-            "rate": 1.0194364188591876
+            "total": 197.93,
+            "rate": 0.9248587496128382
           }
         }
       ]

@@ -58,7 +58,7 @@ services:
       - qwen36-dflash15    # Context. -c: context size in tokens. Override per-run with LLAMA_CTX
       # (e.g. LLAMA_CTX=32768 for accuracy runs); default is the model max (256k).
       - -c
-      - "${LLAMA_CTX:-45000}"
+      - "${LLAMA_CTX:-256000}"
 
       # GPU placement. Single GPU on this box: no tensor-split needed.
       - -ngl
