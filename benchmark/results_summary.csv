@@ -58,3 +58,9 @@ dflash,qwen36-dflash15,198.74,3.71,203.65,177.80,39.4,85.5,2.17,169.95,182.96,4.
 dflash+map-k4v,qwen36-dflash-map-k4v,200.61,3.75,206.83,180.24,39.5,85.8,2.17,167.27,169.11,3.98,127308
 dflash+ngram-mod,qwen36-dflash-ngram-mod,304.25,5.68,375.55,260.34,51.3,92.4,1.80,164.58,317.18,3.76,122124
 dflash+ngram-mod+map-k4v,qwen3.6-dflash15-ngram-mod-map-k4v,321.45,6.01,384.99,275.61,50.3,92.1,1.83,166.36,325.09,3.58,124557
+
+# TABLE 7: VRAM FOOTPRINT - benchmark/vram_bench.py 2026-07-15, RTX PRO 6000 Blackwell (97887 MiB). nvidia-smi compute-app memory sampled at 4 Hz through stop -> load -> 3 greedy prompts (code 512, story 2048, repetitive-context 512) -> stop, one service at a time, compose defaults (ctx 256000, f16 KV, -fa on). Findings: (1) DFlash costs +5554 MiB over base = draft weights (1.8 GB Q8_0 GGUF) + draft KV cache and buffers at ctx 256k; (2) the n-gram drafters are FREE on the GPU - dflash and dflash+ngram measured identical to the MiB (lookup tables live in host RAM); (3) llama.cpp preallocates everything at load: load peak == post-load steady, and inference peaks only 92-192 MiB above steady (activation scratch). Idle compute VRAM was 0 MiB before each load (the compute-apps query excludes desktop graphics). Raw timelines in benchmark/bench_results/vram/.
+run,model_alias,after_load_mib,infer_peak_mib,delta_vs_base_mib,delta_vs_dflash_mib
+base,qwen3.6-27B,33256,33348,0,
+dflash,qwen36-dflash15,38810,39002,5554,0
+dflash_ngram,qwen36-dflash-ngram,38810,39002,5554,0

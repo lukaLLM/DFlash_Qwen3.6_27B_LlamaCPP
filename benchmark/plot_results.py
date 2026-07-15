@@ -6,7 +6,7 @@
 """Render the README charts from results_summary.csv.
 
 Reads the labeled tables out of benchmark/results_summary.csv (the `# TABLE n:`
-blocks) and writes six PNGs to assets/:
+blocks) and writes seven PNGs to assets/:
 
   speed_vs_context.png    - gen tok/s vs context size, base vs DFlash vs +ngram
   accuracy_vs_speed.png   - MATH-500 (N=500) pass@1 + gen tok/s during that run
@@ -14,6 +14,7 @@ blocks) and writes six PNGs to assets/:
   ngram_ablation.png      - bench_ngram iterative-coding decode t/s per stack
   lcb_accuracy.png        - official LiveCodeBench pass@1, base vs DFlash
   lcb_speed_ab.png        - LCB real-prompt replay A/B, DFlash vs DFlash+ngram
+  vram_footprint.png      - VRAM after load / inference peak per server config
 
 Regenerate after editing the CSV:  uv run benchmark/plot_results.py
 """
@@ -414,10 +415,54 @@ def plot_lcb_speed_ab(tables: dict) -> None:
     plt.close(fig)
 
 
+def plot_vram_footprint(tables: dict) -> None:
+    rows = {r["run"]: r for r in tables["7"]}
+    order = (
+        ("base", "base", GRAY),
+        ("dflash", "DFlash", BLUE),
+        ("dflash_ngram", "DFlash + ngram", GREEN),
+    )
+
+    fig, ax = plt.subplots(figsize=(6.8, 4.4), dpi=DPI)
+    fig.patch.set_facecolor(SURFACE)
+    style_axes(ax)
+    ax.set_xlim(-0.7, 2.7)
+    ax.set_ylim(0, 50)
+    fig.canvas.draw()  # finalize transforms for px-accurate rounding
+
+    deltas = ("", "+5.4 GiB vs base", "+0.0 GiB vs DFlash")
+    for x, ((run, label, color), delta) in enumerate(zip(order, deltas)):
+        peak = float(rows[run]["infer_peak_mib"]) / 1024
+        steady = float(rows[run]["after_load_mib"]) / 1024
+        rounded_bar(ax, x, peak, 0.22, color)
+        if delta:
+            ax.annotate(delta, (x, peak), xytext=(0, 31),
+                        textcoords="offset points", ha="center",
+                        fontsize=8.5, color=INK_2)
+        ax.annotate(f"{peak:.1f} GiB", (x, peak), xytext=(0, 18),
+                    textcoords="offset points", ha="center",
+                    fontsize=11, color=INK, fontweight="bold")
+        ax.annotate(f"after load {steady:.1f}", (x, peak), xytext=(0, 6),
+                    textcoords="offset points", ha="center",
+                    fontsize=8, color=INK_2)
+    ax.set_xticks(range(len(order)))
+    ax.set_xticklabels([label for _, label, _ in order], fontsize=10)
+    ax.set_title("VRAM footprint: the n-gram drafters are free",
+                 color=INK, fontsize=13, fontweight="bold", loc="left", pad=16)
+    ax.text(0, 1.02, "peak GPU memory during inference · ctx 256k, f16 KV, greedy"
+                     " · RTX PRO 6000 (95.6 GiB)",
+            transform=ax.transAxes, fontsize=8.5, color=INK_2)
+    ax.set_ylabel("GiB (nvidia-smi, compute apps)", color=MUTED, fontsize=9)
+
+    fig.tight_layout()
+    fig.savefig(ASSETS / "vram_footprint.png", facecolor=SURFACE)
+    plt.close(fig)
+
+
 def main() -> None:
     plt.rcParams["font.family"] = "DejaVu Sans"
     tables = load_tables(CSV_FILE)
-    for tid in ("1", "2", "2B", "4", "5", "6"):
+    for tid in ("1", "2", "2B", "4", "5", "6", "7"):
         if tid not in tables or not tables[tid]:
             raise SystemExit(f"results_summary.csv: TABLE {tid} missing or empty")
     ASSETS.mkdir(exist_ok=True)
@@ -427,8 +472,10 @@ def main() -> None:
     plot_ngram_ablation(tables)
     plot_lcb_accuracy(tables)
     plot_lcb_speed_ab(tables)
+    plot_vram_footprint(tables)
     for name in ("speed_vs_context", "accuracy_vs_speed", "accuracy_by_subject",
-                 "ngram_ablation", "lcb_accuracy", "lcb_speed_ab"):
+                 "ngram_ablation", "lcb_accuracy", "lcb_speed_ab",
+                 "vram_footprint"):
         print(f"wrote assets/{name}.png")
 
 

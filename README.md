@@ -22,7 +22,7 @@ All numbers here are measured on a single card:
 | **GPU** | NVIDIA RTX PRO 6000 Blackwell Workstation Edition (Blackwell, compute capability 12.0) |
 | **VRAM** | 97 GB - target + draft both fit on one card |
 | **Host** | Zen4 CPU |
-| **llama.cpp** | `ghcr.io/ggml-org/llama.cpp:server-cuda13` (CUDA 13) |
+| **llama.cpp** | `ghcr.io/ggml-org/llama.cpp:server-cuda13` - build `b9859` (commit `4fc4ec5`, image 2026-07-02), CUDA 13.3.0, needs driver >= 580 (or a 535+ branch listed by the image) |
 | **GPU layout** | single GPU, `-ngl -1`, no tensor split |
 | **Raw baseline** (no speculation) | **71 tok/s** generation (`llama bench` tg128) · **3877 tok/s** prompt processing (pp512) |
 
@@ -281,6 +281,36 @@ uv run benchmark/bench_ngram.py                     # repeat per LLAMA_SPEC_TYPE
 > target, so it would systematically understate (or miss) exactly the effect
 > this repo is measuring. bench_ngram plus the aiperf LCB replay cover both
 > sides instead.
+
+### VRAM footprint - what the speedups cost in memory (`benchmark/vram_bench.py`)
+
+![VRAM footprint](assets/vram_footprint.png)
+
+One server at a time at the compose defaults (ctx 256000, f16 KV, `-fa on`),
+`nvidia-smi` compute-app memory sampled at 4 Hz through load, three greedy
+prompts (code 512 / story 2048 / repetitive-context 512), and teardown
+(2026-07-15, `benchmark/bench_results/vram/`):
+
+| Config | After load | Inference peak | vs base | vs DFlash |
+|---|---:|---:|---:|---:|
+| base | 33 256 MiB | 33 348 MiB | - | - |
+| DFlash | 38 810 MiB | 39 002 MiB | +5 554 MiB | - |
+| DFlash + ngram | 38 810 MiB | 39 002 MiB | +5 554 MiB | **+0 MiB** |
+
+- **DFlash costs ~5.4 GiB**: the Q8_0 draft GGUF is 1.8 GB on disk, and the
+  rest is the draft model's own KV cache and buffers at ctx 256k (the draft
+  KV scales with `-c` just like the target's).
+- **The n-gram drafters are literally free on the GPU** - DFlash and
+  DFlash+ngram measured identical to the MiB. The lookup tables
+  (`ngram-mod`, `ngram-map-k4v`) live in host RAM.
+- **Everything is preallocated at load.** Load peak equals post-load steady,
+  and running prompts moves the needle by only 92-192 MiB of activation
+  scratch. The footprint you see after `/health` goes green is the footprint
+  you keep.
+
+Reproduce: `python3 benchmark/vram_bench.py` (cycles the three compose
+services on :8001; per-sample timelines land in
+`benchmark/bench_results/vram/`).
 
 ## Choosing a DFlash draft GGUF
 
@@ -730,7 +760,11 @@ live server.
    [bench_ngram](#iterative-coding---the-n-gram-ablation-bench_ngram):
    `uv run benchmark/bench_ngram.py --baseline`, then one run per
    `LLAMA_SPEC_TYPE` variant.
-7. **Summary + charts**: transcribe new numbers into
+7. **VRAM footprint** -
+   [VRAM footprint](#vram-footprint---what-the-speedups-cost-in-memory-benchmarkvram_benchpy):
+   `python3 benchmark/vram_bench.py` (cycles the three servers itself;
+   whatever is on :8001 gets stopped first).
+8. **Summary + charts**: transcribe new numbers into
    [`benchmark/results_summary.csv`](benchmark/results_summary.csv) (labeled
    `# TABLE n:` blocks), then `uv run benchmark/plot_results.py` regenerates
    every chart in `assets/`.
