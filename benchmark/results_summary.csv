@@ -45,11 +45,11 @@ run,model_alias,n_problems,window,release,pass_at_1_pct,correct
 base,qwen3.6-27B,58,2024-08-01..2024-08-31,release_v5,18.97,11
 dflash,qwen36-dflash15test,58,2024-08-01..2024-08-31,release_v5,20.69,12
 
-# TABLE 5: LCB REAL-PROMPT SPEED - same LiveCodeBench prompts replayed through aiperf (greedy, concurrency 1, seed 42). Single-turn real prompts: ngram adds nothing over dflash here (no repeated context to copy). The 30-request replay artifacts were deleted; its row comes from the results.md log paste.
-run,source,dataset,n_requests,gen_tps_per_user,total_tps,ttft_ms,itl_ms,avg_osl,accept_pct
-dflash,lcb_speed.sh,lcb_release_v5_first100,100,176.07,140.43,1080.2,6.05,2602.0,47
-dflash_ngram,lcb_speed.sh,lcb_release_v5_first100,100,170.33,137.58,1029.3,6.21,2511.9,42
-dflash_ngram,aiperf replay (log in results.md),lcb_aug2024.jsonl,30,195.18,148.98,293.4,6.07,516.3,
+# TABLE 5: LCB REAL-PROMPT SPEED - same LiveCodeBench prompts replayed through aiperf (greedy, concurrency 1, seed 42). Single-turn real prompts: ngram adds nothing over dflash here (no repeated context to copy). ttst_ms = avg Time to Second Token (profile_export_aiperf.csv); q0_* = the lcb_speed.sh single-prompt acceptance probe (draft_n_accepted / draft_n from llama.cpp timings, acceptance.txt). The 30-request replay artifacts were deleted; its row comes from the results.md log paste.
+run,source,dataset,n_requests,gen_tps_per_user,total_tps,ttft_ms,itl_ms,ttst_ms,avg_osl,accept_pct,q0_draft_accepted,q0_draft_total,q0_tps
+dflash,lcb_speed.sh,lcb_release_v5_first100,100,176.07,140.43,1080.2,6.05,30.53,2602.0,47,249,525,286.5
+dflash_ngram,lcb_speed.sh,lcb_release_v5_first100,100,170.33,137.58,1029.3,6.21,69.13,2511.9,42,248,589,260.2
+dflash_ngram,aiperf replay (log in results.md),lcb_aug2024.jsonl,30,195.18,148.98,293.4,6.07,,516.3,,,,
 
 # TABLE 6: NGRAM CODING BENCH - bench_ngram.py 18-turn cumulative coding session (build 1-9, maint 10-18 = working on the existing code), server/model default sampling, 2026-07-12. decode/maint/e2e in tok/s; the baseline SLOWS as context grows (early->late) while ngram stacks ACCELERATE (more context = more to copy).
 run,model_alias,decode_tps,speedup_vs_base,maint_tps,e2e_tps,accept_pct,spec_share_pct,draft_overhead,early_tps,late_tps,avg_ttft_s,total_tokens

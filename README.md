@@ -170,6 +170,8 @@ the [iterative-coding ablation](#iterative-coding---the-n-gram-ablation-bench_ng
 
 ### Real-prompt A/B - DFlash vs DFlash-ngram (LiveCodeBench, N=100)
 
+![LCB real-prompt A/B](assets/lcb_speed_ab.png)
+
 Same 100 LiveCodeBench prompts replayed in identical order through aiperf
 (greedy, natural EOS, concurrency 1) against each server - the trained DFlash
 drafter vs the n-gram drafter stack (`draft-dflash,ngram-mod,ngram-map-k4v`).

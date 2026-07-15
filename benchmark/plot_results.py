@@ -6,13 +6,14 @@
 """Render the README charts from results_summary.csv.
 
 Reads the labeled tables out of benchmark/results_summary.csv (the `# TABLE n:`
-blocks) and writes five PNGs to assets/:
+blocks) and writes six PNGs to assets/:
 
   speed_vs_context.png    - gen tok/s vs context size, base vs DFlash vs +ngram
   accuracy_vs_speed.png   - MATH-500 (N=500) pass@1 + gen tok/s during that run
   accuracy_by_subject.png - per-subject correct counts, base vs DFlash (N=500)
   ngram_ablation.png      - bench_ngram iterative-coding decode t/s per stack
   lcb_accuracy.png        - official LiveCodeBench pass@1, base vs DFlash
+  lcb_speed_ab.png        - LCB real-prompt replay A/B, DFlash vs DFlash+ngram
 
 Regenerate after editing the CSV:  uv run benchmark/plot_results.py
 """
@@ -358,10 +359,65 @@ def plot_lcb_accuracy(tables: dict) -> None:
     plt.close(fig)
 
 
+def plot_lcb_speed_ab(tables: dict) -> None:
+    rows = {r["run"]: r for r in tables["5"]
+            if r["dataset"] == "lcb_release_v5_first100"}
+    dflash, ngram = rows["dflash"], rows["dflash_ngram"]
+    pair = (dflash, ngram)
+
+    accept = [100 * float(r["q0_draft_accepted"]) / float(r["q0_draft_total"])
+              for r in pair]
+    counts = [f"{r['q0_draft_accepted']}/{r['q0_draft_total']}" for r in pair]
+    panels = (
+        ("draft acceptance (q0)", accept, "{:.0f}%", 62, "higher is better", counts),
+        ("gen tok/s per user (avg)",
+         [float(r["gen_tps_per_user"]) for r in pair], "{:.0f}", 215,
+         "higher is better", None),
+        ("inter-token latency (ms)",
+         [float(r["itl_ms"]) for r in pair], "{:.2f}", 8.2,
+         "lower is better", None),
+        ("time to 2nd token (ms)",
+         [float(r["ttst_ms"]) for r in pair], "{:.0f}", 88,
+         "lower is better", None),
+    )
+
+    fig, axes = plt.subplots(1, 4, figsize=(10.2, 3.9), dpi=DPI)
+    fig.patch.set_facecolor(SURFACE)
+    fig.suptitle("Real coding prompts, single turn: DFlash edges out the n-gram stack",
+                 x=0.045, ha="left", color=INK, fontsize=13, fontweight="bold")
+    fig.text(0.045, 0.885,
+             "same 100 LiveCodeBench prompts replayed in order via aiperf — greedy, concurrency 1, seed 42",
+             fontsize=9, color=INK_2)
+
+    for ax, (title, vals, fmt_s, ymax, direction, subs) in zip(axes, panels):
+        style_axes(ax)
+        ax.set_xlim(-0.7, 1.7)
+        ax.set_ylim(0, ymax)
+        fig.canvas.draw()  # finalize transforms for px-accurate rounding
+        for x, (val, color) in enumerate(zip(vals, (BLUE, GREEN))):
+            rounded_bar(ax, x, val, 0.22, color)
+            ax.annotate(fmt_s.format(val), (x, val),
+                        xytext=(0, 17 if subs else 6),
+                        textcoords="offset points", ha="center",
+                        fontsize=11, color=INK, fontweight="bold")
+            if subs:
+                ax.annotate(subs[x], (x, val), xytext=(0, 5),
+                            textcoords="offset points", ha="center",
+                            fontsize=8, color=INK_2)
+        ax.set_xticks([0, 1])
+        ax.set_xticklabels(["DFlash", "+ngram"], fontsize=9)
+        ax.set_title(title, color=INK_2, fontsize=9.5, pad=10)
+        ax.set_xlabel(direction, color=MUTED, fontsize=8)
+
+    fig.tight_layout(rect=(0, 0, 1, 0.85))
+    fig.savefig(ASSETS / "lcb_speed_ab.png", facecolor=SURFACE)
+    plt.close(fig)
+
+
 def main() -> None:
     plt.rcParams["font.family"] = "DejaVu Sans"
     tables = load_tables(CSV_FILE)
-    for tid in ("1", "2", "2B", "4", "6"):
+    for tid in ("1", "2", "2B", "4", "5", "6"):
         if tid not in tables or not tables[tid]:
             raise SystemExit(f"results_summary.csv: TABLE {tid} missing or empty")
     ASSETS.mkdir(exist_ok=True)
@@ -370,8 +426,9 @@ def main() -> None:
     plot_accuracy_by_subject(tables)
     plot_ngram_ablation(tables)
     plot_lcb_accuracy(tables)
+    plot_lcb_speed_ab(tables)
     for name in ("speed_vs_context", "accuracy_vs_speed", "accuracy_by_subject",
-                 "ngram_ablation", "lcb_accuracy"):
+                 "ngram_ablation", "lcb_accuracy", "lcb_speed_ab"):
         print(f"wrote assets/{name}.png")
 
 
