@@ -1,1 +1,0 @@
-osl=36864 no draft stats (not a spec server?)

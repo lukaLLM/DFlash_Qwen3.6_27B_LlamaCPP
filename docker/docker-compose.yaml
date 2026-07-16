@@ -55,10 +55,10 @@ services:
       - "8000"
       # --alias: model name reported to API clients.
       - --alias
-      - qwen36-dflash15test    # Context. -c: context size in tokens. Override per-run with LLAMA_CTX
+      - qwen36-dflash15    # Context. -c: context size in tokens. Override per-run with LLAMA_CTX
       # (e.g. LLAMA_CTX=32768 for accuracy runs); default is the model max (256k).
       - -c
-      - "${LLAMA_CTX:-32768}"
+      - "${LLAMA_CTX:-256000}"
 
       # GPU placement. Single GPU on this box: no tensor-split needed.
       - -ngl
@@ -115,7 +115,7 @@ services:
       - server
 
     ports:
-      - "${LLAMA_BASELINE_HOST_PORT:-8000}:8000"   # host:container (server listens on 8000)
+      - "${LLAMA_BASELINE_HOST_PORT:-8001}:8000"   # host:container (server listens on 8000)
 
     ipc: host               # share host IPC (avoids small /dev/shm limit)
     gpus: all               # expose all host GPUs
@@ -154,7 +154,7 @@ services:
       # Context. -c: context size in tokens. Keep identical to DFlash for a fair
       # comparison. Override per-run with LLAMA_CTX (e.g. LLAMA_CTX=32768).
       - -c
-      - "${LLAMA_CTX:-32768}"
+      - "${LLAMA_CTX:-256000}"
 
       # GPU placement. Single GPU on this box: no tensor-split needed.
       - -ngl
@@ -270,5 +270,153 @@ services:
       - --log-verbosity
       - "${LLAMA_VERBOSITY:-3}"
 
+
+    restart: unless-stopped
+
+
+
+  # ==========================================================================
+  # DFlash + n-gram lookup stack, tuned for MAX single-user speed.
+  #
+  # Same target + DFlash draft as llamacpp_dflash; adds two model-free n-gram
+  # drafters on top. This is the DFlash analog of the "MTP + ngram-mod + k4v"
+  # recipe (draft-mtp -> draft-dflash). Mutually exclusive with the dflash / mtp
+  # services (shares port 8001) - run ONE server on the GPU at a time.
+  #   docker compose -f docker/docker-compose.yaml up -d llamacpp_dflash_ngram
+  #   uv run python benchmark/leaderboard.py        # auto-detects :8001 + alias
+  # NOTE: not yet verified to load (no docker run was done). On startup, confirm
+  # the log registers all three spec types; if the triple errors, fall back to
+  # LLAMA_SPEC_TYPE=draft-dflash,ngram-mod (drop k4v) to isolate the culprit.
+  # ==========================================================================
+  llamacpp_dflash_ngram:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda13
+    container_name: LlamaCpp_Qwen36_DFlash_Ngram
+    networks:
+      - server
+    ports:
+      - "${LLAMA_HOST_PORT:-8001}:8000"   # host:container (shared 8001, run alone)
+    ipc: host
+    gpus: all
+    ulimits:
+      memlock: -1
+      stack: 67108864
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    environment:
+      LLAMA_CACHE: /root/.cache/llama.cpp
+      HF_TOKEN: ${HF_TOKEN:-}
+      HUGGING_FACE_HUB_TOKEN: ${HF_TOKEN:-}
+      CUDA_VISIBLE_DEVICES: "${CUDA_VISIBLE_DEVICES:-0}"
+    volumes:
+      - ${HOME}/.cache/llama.cpp:/root/.cache/llama.cpp
+    command:
+      # --- Target + DFlash draft: identical to llamacpp_dflash (non-MTP target) ---
+      - -hf
+      - ${LLAMA_MODEL:-unsloth/Qwen3.6-27B-GGUF:UD-Q4_K_XL}
+      - --spec-draft-hf
+      - ${LLAMA_DRAFT_REPO:-Alittlehammmer/Qwen3.6-27B-DFlash-GGUF-llama.cpp}
+      - --spec-draft-model
+      - ${LLAMA_DRAFT_FILE:-Qwen3.6-27B-DFlash-Q8_0.gguf}
+
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --alias
+      - "${LLAMA_ALIAS:-qwen36-dflash-ngram}"   # leaderboard groups runs by this name
+      - -c
+      - "${LLAMA_CTX:-256000}"
+
+      # --- GPU placement: target + draft fully on the card ---
+      - -ngl
+      - "-1"
+      - --spec-draft-ngl
+      - ${LLAMA_DRAFT_NGL:-all}
+
+      # --- Flash attention ON (required for the fast f16 KV path) ---
+      - -fa
+      - "on"
+
+      # === Speculative stack: DFlash + n-gram lookup drafters =================
+      # Comma-separated = STACKED drafters. DFlash proposes from the draft model;
+      # the n-gram drafters cheaply extend the draft with verbatim spans copied
+      # from context (big win on code / JSON / repeated text). The target verifies
+      # every proposed token in one pass, so it stays output-lossless at temp 0 -
+      # extra drafters can only add speed or waste a little, never change outputs.
+      # Full --spec-type menu in this build (b9859):
+      #   draft models : draft-simple  draft-eagle3  draft-mtp  draft-dflash
+      #   n-gram lookup: ngram-simple  ngram-map-k  ngram-map-k4v  ngram-mod
+      #                  ngram-cache   (no tuning flags)
+      # Ablate via LLAMA_SPEC_TYPE (bench_ngram results, decode tok/s):
+      #   draft-dflash                           control, no n-gram   (199)
+      #   draft-dflash,ngram-map-k4v             + k4v only           (201)
+      #   draft-dflash,ngram-mod                 + mod only           (304)
+      #   draft-dflash,ngram-mod,ngram-map-k4v   full stack (default) (321)
+      - --spec-type
+      - "${LLAMA_SPEC_TYPE:-draft-dflash,ngram-mod,ngram-map-k4v}"
+
+      # DFlash draft length. 15 is this build's max supported - use the ceiling.
+      - --spec-draft-n-max
+      - "${LLAMA_SPEC_N:-15}"
+      # Offload draft sampling to the GPU backend (default on) - keep for speed.
+      - --spec-draft-backend-sampling
+
+      # Per-drafter tuning below ships the build's defaults, env-overridable.
+      # Each block is inert unless its drafter is listed in --spec-type.
+      # ngram-mod tuning
+      - --spec-ngram-mod-n-match      # lookup context length            (def 24)
+      - "${LLAMA_NGRAM_MOD_MATCH:-24}"
+      - --spec-ngram-mod-n-min        # min tokens drafted from a match  (def 48)
+      - "${LLAMA_NGRAM_MOD_NMIN:-48}"
+      - --spec-ngram-mod-n-max        # max tokens drafted from a match  (def 64)
+      - "${LLAMA_NGRAM_MOD_NMAX:-64}"
+      # ngram-map-k4v tuning (the "k4v" drafter)
+      - --spec-ngram-map-k4v-size-n   # lookup n-gram length             (def 12)
+      - "${LLAMA_NGRAM_K4V_N:-12}"
+      - --spec-ngram-map-k4v-size-m   # drafted m-gram length            (def 48)
+      - "${LLAMA_NGRAM_K4V_M:-48}"
+      - --spec-ngram-map-k4v-min-hits # min matches before drafting      (def 1)
+      - "${LLAMA_NGRAM_K4V_HITS:-1}"
+      # (ngram-simple / ngram-map-k / ngram-cache: enable via LLAMA_SPEC_TYPE;
+      #  their tuning flags all default sensibly, so none are passed here)
+      # =======================================================================
+
+      # KV cache type. Default f16 = the fast path. Measured on THIS config
+      # (dflash+ngram, n_max=15, short Fibonacci code prompt, server-cuda13,
+      # -fa on): q8_0 ran ~15-17% slower than f16 (~824 -> ~682 tok/s median)
+      # and dropped draft acceptance 89% -> 79% (quantized KV perturbs the
+      # target's verify logits, so more drafts get rejected). NOT the ~7x an
+      # older repo note claimed - that was long-context; the q8_0 penalty grows
+      # with KV size, so at long ctx it widens. Keep f16 for speed; use q8_0
+      # only when you need the VRAM. Test: LLAMA_CACHE_TYPE_K=q8_0 LLAMA_CACHE_TYPE_V=q8_0
+      - --cache-type-k
+      - "${LLAMA_CACHE_TYPE_K:-f16}"
+      - --cache-type-v
+      - "${LLAMA_CACHE_TYPE_V:-f16}"
+      # Draft-model KV type is a SEPARATE knob (default f16); same caveat.
+      # - --spec-draft-type-k
+      # - "${LLAMA_DRAFT_CACHE_TYPE_K:-q8_0}"
+      # - --spec-draft-type-v
+      # - "${LLAMA_DRAFT_CACHE_TYPE_V:-q8_0}"
+
+      # Prompt-processing throughput knob. Bigger physical ubatch can speed
+      # prefill at long context (VRAM permitting); default 512. Try 1024/2048.
+      # - -ub
+      # - "${LLAMA_UBATCH:-2048}"
+
+      # Single-user measurement (matches the concurrency-1 benchmarks).
+      - --parallel
+      - "${LLAMA_PARALLEL:-1}"
+
+      # Reasoning off = higher draft acceptance = more speed.
+      - --jinja
+      - --reasoning
+      - "off"
+      - --no-mmproj
+
+      - --metrics
+      - --log-verbosity
+      - "${LLAMA_VERBOSITY:-3}"
 
     restart: unless-stopped

@@ -1,0 +1,318 @@
+{
+  "schema_version": "1.0",
+  "aiperf_version": "0.11.0",
+  "benchmark_id": "c221c6641966",
+  "summary": {
+    "endpoints_configured": [
+      "http://localhost:8001/metrics"
+    ],
+    "endpoints_successful": [
+      "http://localhost:8001/metrics"
+    ],
+    "start_time": "2026-07-10T14:18:35.294038",
+    "end_time": "2026-07-10T14:21:22.341292",
+    "endpoint_info": {
+      "http://localhost:8001/metrics": {
+        "total_fetches": 532,
+        "first_fetch_ns": 1783685902144542335,
+        "last_fetch_ns": 1783686082347301146,
+        "avg_fetch_latency_ms": 20.95255532894737,
+        "unique_updates": 531,
+        "first_update_ns": 1783685902144542335,
+        "last_update_ns": 1783686082347301146,
+        "duration_seconds": 180.202758811,
+        "avg_update_interval_ms": 340.0052053037736,
+        "median_update_interval_ms": 333.4458285
+      }
+    }
+  },
+  "metrics": {
+    "llamacpp:n_busy_slots_per_decode": {
+      "type": "gauge",
+      "description": "Average number of busy slots per llama_decode() call",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "avg": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "std": 0.0,
+            "p1": 1.0,
+            "p5": 1.0,
+            "p10": 1.0,
+            "p25": 1.0,
+            "p50": 1.0,
+            "p75": 1.0,
+            "p90": 1.0,
+            "p95": 1.0,
+            "p99": 1.0
+          }
+        }
+      ]
+    },
+    "llamacpp:n_decode": {
+      "type": "counter",
+      "description": "Total number of llama_decode() calls",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "total": 5318.0,
+            "rate": 31.81865341130569
+          }
+        }
+      ]
+    },
+    "llamacpp:n_tokens_max": {
+      "type": "counter",
+      "description": "Largest observed n_tokens.",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "total": 0.0,
+            "rate": 0.0
+          }
+        }
+      ]
+    },
+    "llamacpp:predicted_tokens_seconds": {
+      "type": "gauge",
+      "description": "Average generation throughput in tokens/s.",
+      "unit": "tokens/s",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "avg": 97.76522529880478,
+            "min": 93.5876,
+            "max": 119.808,
+            "std": 5.746064142287559,
+            "p1": 93.5876,
+            "p5": 93.9819,
+            "p10": 94.1338,
+            "p25": 94.9986,
+            "p50": 95.5358,
+            "p75": 97.6833,
+            "p90": 105.323,
+            "p95": 113.904,
+            "p99": 119.808
+          }
+        }
+      ]
+    },
+    "llamacpp:prompt_seconds": {
+      "type": "counter",
+      "description": "Prompt process time",
+      "unit": "seconds",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "total": 7.898,
+            "rate": 0.04725530737918246
+          }
+        }
+      ]
+    },
+    "llamacpp:prompt_tokens": {
+      "type": "counter",
+      "description": "Number of prompt tokens processed.",
+      "unit": "tokens",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "total": 15726.0,
+            "rate": 94.09179081350005
+          }
+        }
+      ]
+    },
+    "llamacpp:prompt_tokens_seconds": {
+      "type": "gauge",
+      "description": "Average prompt throughput in tokens/s.",
+      "unit": "tokens/s",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "avg": 1813.717390438247,
+            "min": 1337.14,
+            "max": 1931.74,
+            "std": 106.91662038399024,
+            "p1": 1485.42,
+            "p5": 1578.83,
+            "p10": 1639.83,
+            "p25": 1767.96,
+            "p50": 1850.12,
+            "p75": 1880.47,
+            "p90": 1913.56,
+            "p95": 1919.83,
+            "p99": 1931.74
+          }
+        }
+      ]
+    },
+    "llamacpp:requests_deferred": {
+      "type": "gauge",
+      "description": "Number of requests deferred.",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "avg": 0.0,
+            "min": 0.0,
+            "max": 0.0,
+            "std": 0.0,
+            "p1": 0.0,
+            "p5": 0.0,
+            "p10": 0.0,
+            "p25": 0.0,
+            "p50": 0.0,
+            "p75": 0.0,
+            "p90": 0.0,
+            "p95": 0.0,
+            "p99": 0.0
+          }
+        }
+      ]
+    },
+    "llamacpp:requests_processing": {
+      "type": "gauge",
+      "description": "Number of requests processing.",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "avg": 0.9940239043824701,
+            "min": 0.0,
+            "max": 1.0,
+            "std": 0.07715075468456561,
+            "p1": 1.0,
+            "p5": 1.0,
+            "p10": 1.0,
+            "p25": 1.0,
+            "p50": 1.0,
+            "p75": 1.0,
+            "p90": 1.0,
+            "p95": 1.0,
+            "p99": 1.0
+          }
+        }
+      ]
+    },
+    "llamacpp:tokens_predicted": {
+      "type": "counter",
+      "description": "Number of generation tokens processed.",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "total": 15872.0,
+            "rate": 94.96533789850393
+          }
+        }
+      ]
+    },
+    "llamacpp:tokens_predicted_seconds": {
+      "type": "counter",
+      "description": "Predict process time",
+      "unit": "seconds",
+      "series": [
+        {
+          "endpoint_url": "http://localhost:8001/metrics",
+          "stats": {
+            "total": 160.529,
+            "rate": 0.9604769863601901
+          }
+        }
+      ]
+    }
+  },
+  "input_config": {
+    "models": {
+      "items": [
+        {
+          "name": "qwen36-dflash-ngram"
+        }
+      ]
+    },
+    "endpoint": {
+      "urls": [
+        "http://localhost:8001"
+      ],
+      "type": "chat",
+      "streaming": true,
+      "extra": {
+        "temperature": 0,
+        "top_p": 1.0,
+        "top_k": 1,
+        "ignore_eos": true,
+        "min_tokens": 512
+      }
+    },
+    "datasets": [
+      {
+        "name": "main",
+        "type": "synthetic",
+        "entries": 30,
+        "random_seed": 42,
+        "prompts": {
+          "isl": {
+            "mean": 512.0,
+            "stddev": 0.0
+          },
+          "osl": {
+            "mean": 512.0,
+            "stddev": 0.0
+          }
+        }
+      }
+    ],
+    "phases": [
+      {
+        "name": "warmup",
+        "type": "concurrency",
+        "exclude_from_results": true,
+        "requests": 2,
+        "concurrency": 1
+      },
+      {
+        "name": "profiling",
+        "type": "concurrency",
+        "requests": 30,
+        "concurrency": 1
+      }
+    ],
+    "artifacts": {
+      "dir": "/home/luke/Documents/Code/DFlash/artifacts/dflash_ngram/speed/isl512_osl512",
+      "records": [
+        "jsonl"
+      ],
+      "auto_plot": false,
+      "plot_required": false
+    },
+    "tokenizer": {
+      "name": "Qwen/Qwen3.6-27B"
+    },
+    "gpu_telemetry": {
+      "enabled": true
+    },
+    "server_metrics": {
+      "enabled": true,
+      "urls": [],
+      "formats": [
+        "json",
+        "csv"
+      ]
+    },
+    "network_latency": {
+      "enabled": false
+    },
+    "otel": {},
+    "mlflow": {},
+    "wandb": {}
+  }
+}

@@ -1,20 +1,20 @@
 # AIPerf Server Metrics Export (CSV)
 # aiperf_version: 0.11.0
 # schema_version: 1.0
-# benchmark_id: 22eb90677acc
+# benchmark_id: ce09e3ed81e9
 # Note: Same benchmark_id and version appear in JSON and Parquet exports
 #
 Endpoint,Type,Metric,Unit,avg,min,max,std,p1,p5,p10,p25,p50,p75,p90,p95,p99,Description
 localhost:8001,gauge,llamacpp:n_busy_slots_per_decode,,1.0000,1.0000,1.0000,0.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,Average number of busy slots per llama_decode() call
-localhost:8001,gauge,llamacpp:predicted_tokens_seconds,tokens/s,141.5740,125.4790,162.2730,10.4946,125.4790,125.4790,125.4790,134.2640,139.3310,151.0960,160.6370,160.6370,160.6370,Average generation throughput in tokens/s.
-localhost:8001,gauge,llamacpp:prompt_tokens_seconds,tokens/s,2480.9366,2235.4900,2621.9000,104.6655,2305.7200,2305.7200,2305.7200,2414.0200,2499.8600,2562.1200,2612.2000,2621.9000,2621.9000,Average prompt throughput in tokens/s.
+localhost:8001,gauge,llamacpp:predicted_tokens_seconds,tokens/s,145.2817,126.2550,166.9350,11.9360,126.2550,126.2550,126.2550,136.7250,143.1730,156.1710,165.6000,165.6000,165.6000,Average generation throughput in tokens/s.
+localhost:8001,gauge,llamacpp:prompt_tokens_seconds,tokens/s,2560.4038,2278.0600,2698.2300,112.0923,2363.5600,2363.5600,2363.5600,2488.2000,2584.4100,2671.3300,2697.3460,2698.2300,2698.2300,Average prompt throughput in tokens/s.
 localhost:8001,gauge,llamacpp:requests_deferred,,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,Number of requests deferred.
-localhost:8001,gauge,llamacpp:requests_processing,,0.9941,0.0000,1.0000,0.0768,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,Number of requests processing.
+localhost:8001,gauge,llamacpp:requests_processing,,0.9953,0.0000,1.0000,0.0683,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,Number of requests processing.
 
 Endpoint,Type,Metric,Unit,total,rate,rate_avg,rate_min,rate_max,rate_std,Description
-localhost:8001,counter,llamacpp:n_decode,,7192.0000,31.9382,,,,,Total number of llama_decode() calls
+localhost:8001,counter,llamacpp:n_decode,,7187.0000,33.5824,,,,,Total number of llama_decode() calls
 localhost:8001,counter,llamacpp:n_tokens_max,,0.0000,0.0000,,,,,Largest observed n_tokens.
-localhost:8001,counter,llamacpp:prompt_seconds,seconds,14.0200,0.0623,,,,,Prompt process time
-localhost:8001,counter,llamacpp:prompt_tokens,tokens,41081.0000,182.4321,,,,,Number of prompt tokens processed.
-localhost:8001,counter,llamacpp:tokens_predicted,,45056.0000,200.0842,,,,,Number of generation tokens processed.
-localhost:8001,counter,llamacpp:tokens_predicted_seconds,seconds,229.5620,1.0194,,,,,Predict process time
+localhost:8001,counter,llamacpp:prompt_seconds,seconds,13.5160,0.0632,,,,,Prompt process time
+localhost:8001,counter,llamacpp:prompt_tokens,tokens,41081.0000,191.9574,,,,,Number of prompt tokens processed.
+localhost:8001,counter,llamacpp:tokens_predicted,,40960.0000,191.3920,,,,,Number of generation tokens processed.
+localhost:8001,counter,llamacpp:tokens_predicted_seconds,seconds,197.9300,0.9249,,,,,Predict process time
