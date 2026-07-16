@@ -13,6 +13,7 @@ We discuss it here https://www.reddit.com/r/LocalLLaMA/comments/1uq0h4o/i_tested
 
 LOCAL AI / SPECULATIVE DECODING SERIES:
 
+- **NEW:** Up to 8x Faster AI N-gram Explained, Deployed & Benchmarked on Qwen 3 6 27B Lamma cpp! https://youtu.be/zNUoHONUHGk
 - Up to 6x Faster AI? DFlash Explained, Deployed & Benchmarked on Qwen 3.6 27B. Lamma.cpp! https://www.youtube.com/watch?v=TUdihA_dJjo 
 
 ## Hardware
